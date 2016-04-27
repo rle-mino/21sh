@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 00:56:10 by ishafie           #+#    #+#             */
-/*   Updated: 2016/04/26 08:14:39 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/04/27 02:21:53 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ int				init_term(void)
 		return (0);
 	if (tgetent(NULL, name_term) == ERR)
 		return (0);
-	tputs(tgetstr("im", &tmp), 1, ft_putint);
+//	tputs(tgetstr("im", &tmp), 1, ft_putint);
+//	tputs(tgetstr("mi", &tmp), 1, ft_putint);
+	tputs(tgetstr("am", &tmp), 1, ft_putint);
+	tputs(tgetstr("xn", &tmp), 1, ft_putint);
 	return (1);
 }
 
@@ -86,4 +89,5 @@ void			init_env(t_le *e)
 {
 	init_fd(e);
 	calc_col(e);
+	get_pos_cursor(&(e->pos_x), &(e->pos_y));
 }

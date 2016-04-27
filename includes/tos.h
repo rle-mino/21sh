@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:40:16 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/04/26 05:47:55 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/04/27 02:24:08 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct			s_line_edit
 {
 	struct s_line_edit	*next;
 	struct s_line_edit	*prev;
+	int					x;
+	int					y;
 	char				c;
 }						t_line;
 
@@ -55,6 +57,8 @@ typedef struct			s_le
 	int					fd;
 	int					w_sizex;
 	int					w_sizey;
+	int					pos_x;
+	int					pos_y;
 	t_line				*line;
 }						t_le;
 
@@ -87,7 +91,7 @@ typedef struct			s_env
 int						env_sw(void);
 char					*edit_line(t_le *le);
 int						get_fd(int fd);
-void					move_cursor(int dir, t_line **line);
+void					move_cursor(t_le *le, int dir, t_line **line);
 int						ft_putint(int c);
 t_line					*get_first(t_line *line);
 
@@ -101,5 +105,8 @@ void					calc_col(t_le *e);
 
 void					malloc_handling(void);
 void					message_handling(void);
+
+int						check_end_window(int winsize);
+void					get_pos_cursor(int *x, int *y);
 
 #endif
