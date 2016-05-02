@@ -6,7 +6,7 @@
 #    By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 09:50:20 by rle-mino          #+#    #+#              #
-#    Updated: 2016/04/26 01:12:22 by rle-mino         ###   ########.fr        #
+#    Updated: 2016/05/02 14:58:33 by ishafie          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@
 
 SRC	=		ft_memset.c			\
 			ft_bzero.c			\
+			ft_cpy_tab.c		\
 			ft_memcpy.c			\
 			ft_memccpy.c		\
 			ft_memmove.c		\
@@ -53,8 +54,10 @@ SRC	=		ft_memset.c			\
 			ft_strnequ.c		\
 			ft_strsub.c			\
 			ft_strjoin.c		\
+			ft_strjoin_slash.c	\
 			ft_strtrim.c		\
 			ft_strsplit.c		\
+			ft_strsplit_space.c	\
 			ft_itoa.c			\
 			ft_putchar.c		\
 			ft_putstr.c			\

@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 15:06:37 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/04/26 01:04:02 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/02 14:58:02 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,10 @@ int					ft_strequ(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
+char				*ft_strjoin_slash(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
+char				**ft_strsplit_space(char const *s);
 char				*ft_itoa(int n);
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
@@ -98,5 +100,6 @@ int					ft_isspace(char c);
 int					get_next_line(int const fd, char **line);
 int					fpf(char const *format, ...);
 int					ft_error(int info);
+char				**ft_cpy_tab(char **src);
 
 #endif
