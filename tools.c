@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/03 02:45:04 by ishafie           #+#    #+#             */
-/*   Updated: 2016/04/03 03:28:27 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/02 19:39:23 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ int			suite_get_all_function(t_env *e, char **args)
 			refill_path(&e);
 			return (1);
 		}
+		return (1);
+	}
+	if (ft_strcmp(args[0], "reset") == 0)
+	{
+		// remettre struct env
+		tputs(tgetstr("cl", NULL), 1, ft_putint);
 		return (1);
 	}
 	return (0);
