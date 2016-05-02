@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   move2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/25 23:37:31 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/01 18:45:56 by rle-mino         ###   ########.fr       */
+/*   Created: 2016/05/01 12:58:51 by rle-mino          #+#    #+#             */
+/*   Updated: 2016/05/01 22:35:43 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tos.h"
 
-int		main(int ac, char **av, char **env)
+void	move_to_first(t_le *le, t_line **line)
 {
-	char				*instruction;
-	struct termios		reset;
-	t_le				*le;
-
-	(void)ac;
-	(void)av;
-	get_from_env(env, 0);
-	if (tcgetattr(0, &reset) == -1)
-		message_handling();
-	if (init_term() == 0)
-		message_handling();
-	le = ft_memalloc(sizeof(t_le));
-	init_env(le);
-	while (42)
+	while ((*line)->prev)
 	{
-		instruction = edit_line(le);
-		fpf("\n%s\n", instruction);
+		if (le->pos_x == 0)
+		{
+			tputs(tgetstr("up", NULL), 1, ft_putint);
+			while (le->pos_x++ < le->w_sizex)
+				tputs(tgetstr("nd", NULL), 1, ft_putint);
+			le->pos_x--;
+		}
+		else
+		{
+			tputs(tgetstr("le", NULL), 1, ft_putint);
+			le->pos_x--;
+		}
+		*line = (*line)->prev;
 	}
-	reset_term(reset);
-	return (0);
 }

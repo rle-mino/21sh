@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 15:06:37 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/04/26 01:04:02 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/01 18:51:28 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ int					ft_isspace(char c);
 int					get_next_line(int const fd, char **line);
 int					fpf(char const *format, ...);
 int					ft_error(int info);
+char				**ft_cpy_tab(char **src);
 
 #endif

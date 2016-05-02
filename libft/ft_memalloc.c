@@ -6,7 +6,7 @@
 /*   By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 18:00:43 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/04/24 17:52:52 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/01 17:14:24 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		*ft_memalloc(size_t size)
 	void	*r;
 
 	if (!(r = malloc(size)))
-		return (NULL);
+		ft_error(MALLER);
 	ft_bzero(r, size);
 	return (r);
 }
