@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 04:20:03 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/03 18:18:39 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/03 20:09:27 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,9 @@ void			get_history(t_le *le, int dir)
 {
 	static t_hist		*history = NULL;
 
-	if (dir == 0)
-	{
-		history = clear_hist(history);
-		return ;
-	}
-	if (!history)
-		history = add_hist(le->line, NULL);
+	/*if (!history)
+		generate_history(le, &history);*/
+	return ;
 	select_old_line(dir, &history, le);
 }
 

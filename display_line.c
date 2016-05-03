@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 18:16:44 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/03 14:53:50 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/03 23:34:03 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 void			margin(t_le *le)
 {
 	int		x;
+	int		x2;
 	int		y;
 
 	x = 0;
 	y = 0;
+	x2 = 0;
 	get_pos_cursor(&x, &y);
 	if (y == le->w_sizey - 1)
 	{

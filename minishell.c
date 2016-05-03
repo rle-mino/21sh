@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 03:18:11 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/03 18:17:53 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/03 18:46:25 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,4 @@ int			loop_prompt(t_env *e)
 		e->total_nb_cmd = get_nb_cmd(line);
 		before_loop_prompt2(e, 0, &line, &new_line);
 	}
-	close(e->le.fd);
 }

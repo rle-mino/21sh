@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 02:45:11 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/03 18:09:20 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/03 23:25:21 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,5 @@ char				*edit_line(t_le *le)
 			break ;
 		}
 	}
-	return (to_string(add_to_arch(get_first(le->line), le)));
+	return (to_string(get_first(le->line)));
 }

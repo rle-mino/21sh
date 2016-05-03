@@ -6,22 +6,11 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/01 12:06:40 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/03 18:18:20 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/03 23:17:36 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tos.h"
-
-t_line					*add_to_arch(t_line *line, t_le *le)
-{
-	char	*tmp;
-
-	get_history(le, 0);
-	tmp = ft_strjoin(to_string(line), "\n");
-	write(le->fd_hist, tmp, ft_strlen(tmp));
-	free(tmp);
-	return (line);
-}
 
 static t_line			*to_line(char *cmd, t_le *le)
 {
@@ -73,7 +62,7 @@ void					*clear_hist(t_hist *hist)
 	return (NULL);
 }
 
-t_hist					*add_hist(t_line *cmd, t_hist *next)
+static t_hist			*add_hist(t_line *cmd, t_hist *next)
 {
 	t_hist		*new;
 
@@ -85,19 +74,13 @@ t_hist					*add_hist(t_line *cmd, t_hist *next)
 
 void					select_old_line(int dir, t_hist **history, t_le *le)
 {
-	char				*cmd;
-
 	if (dir == 2)
 	{
 		if ((*history)->prev)
-			(*history) = (*history)->prev;
-		else if (get_next_line(le->fd_hist, &cmd) == 1)
 		{
-			(*history)->prev = add_hist(to_line(cmd, le), (*history));
 			(*history) = (*history)->prev;
-			free(cmd);
+			le->line = (*history)->old_line;
 		}
-		le->line = (*history)->old_line;
 	}
 	else if (dir == 3)
 	{
@@ -107,4 +90,6 @@ void					select_old_line(int dir, t_hist **history, t_le *le)
 			le->line = (*history)->old_line;
 		}
 	}
+	add_hist(NULL, NULL);
+	to_line(NULL, NULL);
 }
