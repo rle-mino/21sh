@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:40:16 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/03 14:47:19 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/03 18:08:35 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef struct			s_le
 	int					w_sizey;
 	int					pos_x;
 	int					pos_y;
-	int					res_hist;
 	t_line				*line;
 }						t_le;
 
@@ -125,16 +124,18 @@ void					get_pos_cursor(int *x, int *y);
 void					add_to_line_display(t_le *le, t_line **line);
 void					delete_char_display(t_line **line);
 void					redisplay_line(t_line *line);
-void					get_prev_history(t_le *le);
-void					get_next_history(t_le *le);
 t_hist					*get_full_history(int fd);
 int						linelen(t_line *line);
 void					move_to_first(t_le *le, t_line **line);
 char					*get_from_env(char **env, char *to_find);
+void					get_history(t_le *le, int dir);
 t_line					*get_last(t_line *line);
-t_hist					*add_hist(t_line *cmd, t_hist *prev);
+t_hist					*add_hist(t_line *cmd, t_hist *next);
 void					select_old_line(int dir, t_hist **history, t_le *le);
 void					*clear_hist(t_hist *hist);
 void					margin(t_le *le);
+void					move_left(t_le *le, t_line **line);
+t_line					*add_to_arch(t_line *line, t_le *le);
+char					*to_string(t_line *line);
 
 #endif

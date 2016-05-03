@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 03:12:34 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/01 22:17:25 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/03 16:07:44 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_line		*get_last(t_line *line)
 {
-	while (line)
+	while (line->next)
 		line = line->next;
 	return (line);
 }

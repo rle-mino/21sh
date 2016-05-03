@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 03:18:11 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/02 18:40:11 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/03 18:17:53 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		get_all_function(t_env *e, char ***args, char *line)
+int			get_all_function(t_env *e, char ***args, char *line)
 {
 	if (!args || !(*args) || !((*args)[0]))
 		return (0);
@@ -40,7 +40,7 @@ int		get_all_function(t_env *e, char ***args, char *line)
 	return (0);
 }
 
-int		go_prompt(t_env *data_env, char **args)
+int			go_prompt(t_env *data_env, char **args)
 {
 	char	*path;
 	int		error;
@@ -63,7 +63,7 @@ int		go_prompt(t_env *data_env, char **args)
 	return (error);
 }
 
-int		loop_prompt2(t_env *data_env, char *line)
+int			loop_prompt2(t_env *data_env, char *line)
 {
 	char	**args;
 	pid_t	father;
@@ -102,7 +102,7 @@ static void	before_loop_prompt2(t_env *e, int cmd, char **line, char **new_line)
 	}
 }
 
-int		loop_prompt(t_env *e)
+int			loop_prompt(t_env *e)
 {
 	char	*line;
 	char	*new_line;
@@ -118,4 +118,5 @@ int		loop_prompt(t_env *e)
 		e->total_nb_cmd = get_nb_cmd(line);
 		before_loop_prompt2(e, 0, &line, &new_line);
 	}
+	close(e->le.fd);
 }

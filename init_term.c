@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 00:56:10 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/02 15:14:57 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/03 18:06:47 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,6 @@ void			init_env(t_le *e, t_env *env)
 	else
 		hist_path = ft_strjoin(tmp->content, "/.history");
 	get_pos_cursor(&(e->pos_x), &(e->pos_y));
-	if ((e->fd_hist = open(hist_path, O_RDWR)) == -1)
+	if ((e->fd_hist = open(hist_path, O_RDWR | O_APPEND)) == -1)
 		ft_putstr_fd("history unavailable\n", 2);
 }
