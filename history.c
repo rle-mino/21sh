@@ -6,27 +6,30 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/01 12:06:40 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/02 14:19:35 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/02 19:56:04 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tos.h"
 
-static t_line			*to_line(char *cmd)
+static t_line			*to_line(char *cmd, t_le *le)
 {
 	int		i;
 	t_line	*old_line;
 	t_line	*tmp;
 
 	i = -1;
+	le->pos_x = 0;
 	old_line = ft_memalloc(sizeof(t_line));
 	old_line->next = ft_memalloc(sizeof(t_line));
 	old_line->next->prev = old_line;
 	old_line = old_line->next;
 	old_line->c = cmd[++i];
 	tmp = old_line;
+	le->pos_x++;
 	while (cmd[++i] && i < 300)
 	{
+		le->pos_x++;
 		tmp->next = ft_memalloc(sizeof(t_line));
 		tmp->next->prev = tmp;
 		tmp = tmp->next;
@@ -76,16 +79,14 @@ void					select_old_line(int dir, t_hist **history, t_le *le)
 	if (dir == 2)
 	{
 		if ((*history)->prev)
-		{
 			(*history) = (*history)->prev;
-			le->line = (*history)->old_line;
-		}
 		else if (get_next_line(le->fd_hist, &cmd) == 1)
 		{
-			(*history)->next = add_hist(to_line(cmd), (*history));
-			(*history) = (*history)->next;
+			(*history)->prev = add_hist(to_line(cmd, le), (*history));
+			(*history) = (*history)->prev;
 			free(cmd);
 		}
+		le->line = (*history)->old_line;
 	}
 	else if (dir == 3)
 	{

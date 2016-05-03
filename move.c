@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 04:20:03 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/02 13:49:22 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/03 14:02:46 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,19 +72,16 @@ void			get_history(t_le *le, int dir)
 	else
 		history = add_hist(le->line, NULL);
 	select_old_line(dir, &history, le);
-	redisplay_line(le->line);
 }
 
 void			move_cursor(t_le *le, int dir, t_line **line)
 {
 	if (dir == 2 || dir == 3)
 	{
-		move_to_first(le, line);
-		tputs(tgetstr("cd", NULL), 1, ft_putint);
-		get_history(le, dir);
+		//move_to_first(le, line);
+		//tputs(tgetstr("cd", NULL), 1, ft_putint);
+		//get_history(le, dir);
 		//redisplay_line(le->line);
-		//le->pos_x = linelen(le->line);
-		//*line = get_last(le->line);
 	}
 	else if (dir == 1)
 		move_left(le, line);

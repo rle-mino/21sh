@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:40:16 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/02 16:47:37 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/03 14:47:19 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,5 +135,6 @@ t_line					*get_last(t_line *line);
 t_hist					*add_hist(t_line *cmd, t_hist *prev);
 void					select_old_line(int dir, t_hist **history, t_le *le);
 void					*clear_hist(t_hist *hist);
+void					margin(t_le *le);
 
 #endif

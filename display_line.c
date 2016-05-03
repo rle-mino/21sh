@@ -1,39 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display.c                                          :+:      :+:    :+:   */
+/*   display_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 18:16:44 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/01 11:05:08 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/03 14:47:35 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tos.h"
 
-void			add_to_line_display(t_le *le, t_line **line)
+void			margin(t_le *le)
 {
-	char	area[512];
-	char	*tmp;
 	int		x;
 	int		y;
 
 	x = 0;
 	y = 0;
-	tmp = area;
+	get_pos_cursor(&x, &y);
+	if (y == le->w_sizey - 1)
+	{
+		tputs(tgetstr("sc", NULL), 1, ft_putint);
+		tputs(tgetstr("do", NULL), 1, ft_putint);
+		tputs(tgetstr("rc", NULL), 1, ft_putint);
+		tputs(tgetstr("up", NULL), 1, ft_putint);
+	}
+}
+
+void			add_to_line_display(t_le *le, t_line **line)
+{
 	le->pos_x++;
 	ft_putchar_fd((*line)->c, get_fd(-1));
+	margin(le);
 	if (le->pos_x >= le->w_sizex)
 	{
 		le->pos_x = 0;
 		le->pos_y++;
-		tputs(tgetstr("do", &tmp), 1, ft_putint);
+		tputs(tgetstr("do", NULL), 1, ft_putint);
 	}
-	tputs(tgetstr("sc", &tmp), 1, ft_putint);
-	tputs(tgetstr("cd", &tmp), 1, ft_putint);
+	tputs(tgetstr("sc", NULL), 1, ft_putint);
+	tputs(tgetstr("cd", NULL), 1, ft_putint);
 	redisplay_line((*line)->next);
-	tputs(tgetstr("rc", &tmp), 1, ft_putint);
+	tputs(tgetstr("rc", NULL), 1, ft_putint);
 }
 
 void			delete_char_display(t_line **line)

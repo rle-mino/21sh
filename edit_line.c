@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 02:45:11 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/02 16:42:38 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/03 14:47:28 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ static void			add_to_line(t_le *le, t_line **line, char n)
 {
 	t_line	*new;
 
-	if (!(new = ft_memalloc(sizeof(t_line))))
-		ft_error(MALLER);
+	new = ft_memalloc(sizeof(t_line));
 	new->x = le->pos_x + 1;
 	new->y = le->pos_y;
 	new->c = n;
@@ -77,13 +76,13 @@ static void			delete_char(t_le *le, t_line **line, char c)
 char				*edit_line(t_le *le)
 {
 	char	buffer[6];
-	int		winsize;
 
-	winsize = tgetnum("co");
+	le->pos_x = 4;
 	if (!(le->line = ft_memalloc(sizeof(t_line))))
 		ft_error(MALLER);
 	while (42)
 	{
+		margin(le);
 		ft_bzero(buffer, sizeof(buffer));
 		read(0, buffer, 5);
 		if (ft_isprint(buffer[0]))
