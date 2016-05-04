@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 02:45:11 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/03 23:25:21 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/04 19:10:30 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char				*to_string(t_line *line)
 	return (string);
 }
 
-static void			add_to_line(t_le *le, t_line **line, char n)
+void			add_to_line(t_le *le, t_line **line, char n)
 {
 	t_line	*new;
 
@@ -49,7 +49,7 @@ static void			add_to_line(t_le *le, t_line **line, char n)
 	add_to_line_display(le, line);
 }
 
-static void			delete_char(t_le *le, t_line **line, char c)
+void			delete_char(t_le *le, t_line **line, char c)
 {
 	t_line		*tmp;
 
@@ -79,18 +79,14 @@ char				*edit_line(t_le *le)
 	le->pos_x = 4;
 	if (!(le->line = ft_memalloc(sizeof(t_line))))
 		ft_error(MALLER);
+	history(RUP_HIST, le->line);
 	while (42)
 	{
 		margin(le);
 		ft_bzero(buffer, sizeof(buffer));
 		read(0, buffer, 5);
-		if (ft_isprint(buffer[0]))
-			add_to_line(le, &(le->line), buffer[0]);
-		else if (ft_is_arrow(buffer))
-			move_cursor(le, ft_is_arrow(buffer), &(le->line));
-		else if (ft_is_del_or_back(buffer))
-			delete_char(le, &(le->line), buffer[0]);
-		else if (buffer[0] == '\n' && buffer[1] == 0)
+		parse_buffer(buffer, le);
+		if (buffer[0] == '\n' && buffer[1] == 0)
 		{
 			le->pos_x = 0;
 			tputs(tgetstr("do", NULL), 1, ft_putint);

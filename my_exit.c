@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/02 23:44:41 by ishafie           #+#    #+#             */
-/*   Updated: 2016/04/03 03:31:20 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/04 18:31:52 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int					my_exit(char **args)
 	int		i;
 
 	i = 0;
+	history(FIRST_HIST, NULL);
+	history(WRITE_HIST, NULL);
 	if (!args || !(*args) || !(args[1]))
 		exit(0);
 	if (args[1] && args[2])

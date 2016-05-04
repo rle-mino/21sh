@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 04:57:37 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/02 17:59:19 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/04 14:10:10 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@
 
 char					*g_name_prog;
 
-/* MULTI COMMAND*/
+/*
+***		MULTI COMMAND
+*/
 int						get_nb_cmd(char *line);
 void					actualise_command(char **line, char **new_line,
 						int cmd, int n_cmd);

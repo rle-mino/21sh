@@ -6,7 +6,7 @@
 #    By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/25 23:31:13 by rle-mino          #+#    #+#              #
-#    Updated: 2016/05/02 17:09:56 by ishafie          ###   ########.fr        #
+#    Updated: 2016/05/04 18:37:03 by rle-mino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC		=				actualise_env.c 			\
 						free_memory.c				\
 						ft_putint.c					\
 						get.c						\
+						get2.c						\
 						get_env_var.c				\
 						history.c					\
 						init_term.c					\
@@ -40,6 +41,7 @@ SRC		=				actualise_env.c 			\
 						my_set_env.c				\
 						parsing.c					\
 						parsing_arg.c				\
+						buffer_parse.c				\
 						set_env_error.c				\
 						signal_fnt.c				\
 						struct.c					\
@@ -50,7 +52,7 @@ SRC		=				actualise_env.c 			\
 
 OBJ		=				$(SRC:.c=.o)
 
-FLAGS	=				-Wall -Wextra -Werror
+FLAGS	=			 	-Wall -Wextra -Werror
 
 .PHONY: all, clean, fclean, re
 

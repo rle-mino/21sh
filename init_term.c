@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 00:56:10 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/03 20:07:27 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/04 17:02:31 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,16 +87,9 @@ void			calc_col(t_le *e)
 
 void			init_env(t_le *e, t_env *env)
 {
-	char	*hist_path;
-	t_data	*tmp;
-
+	get_t_env(env);
 	init_fd(e);
 	calc_col(e);
-	if (!(tmp = get_anything(env, "HOME")))
-		hist_path = "";
-	else
-		hist_path = ft_strjoin(tmp->content, "/.history");
 	get_pos_cursor(&(e->pos_x), &(e->pos_y));
-	if ((e->fd_hist = open(hist_path, O_RDWR | O_APPEND)) == -1)
-		ft_putstr_fd("history unavailable\n", 2);
+	history(READ_HIST, NULL);
 }

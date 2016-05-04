@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:37:31 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/02 15:15:21 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/04 17:00:08 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 int		main(int ac, char **av, char **env)
 {
-//	char				*instruction;
 	struct termios		reset;
 	t_le				le;
 	t_env				*data_env;
@@ -25,11 +24,6 @@ int		main(int ac, char **av, char **env)
 	signal(SIGINT, safe_exit);
 	if (tcgetattr(0, &reset) == -1)
 		message_handling();
-/*	while (42)
-	{
-		instruction = edit_line(&le);
-		fpf("\n%s\n", instruction);
-		}*/
 	g_name_prog = NULL;
 	data_env = create_env(env);
 	fill_env(&data_env, env);
