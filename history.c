@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/01 12:06:40 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/04 18:21:59 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/05 22:18:31 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,13 @@ t_line					*to_line(char *cmd)
 void					*clear_hist(t_hist *hist)
 {
 	t_hist	*tmp;
-	t_line	*tmp2;
 
 	while (hist->prev)
 		hist = hist->prev;
 	while (hist)
 	{
-		while (hist->old_line->prev)
-			hist->old_line = hist->old_line->prev;
-		while (hist->old_line)
-		{
-			tmp2 = hist->old_line;
-			hist->old_line = hist->old_line->next;
-			free(tmp2);
-		}
+		hist->old_line = get_first_line(hist->old_line);
+		clear_line(hist->old_line);
 		tmp = hist;
 		hist = hist->next;
 		free(tmp);
@@ -60,46 +53,28 @@ void					*clear_hist(t_hist *hist)
 	return (NULL);
 }
 
-t_hist					*add_hist(t_line *cmd, t_hist *next, t_hist *prev)
-{
-	t_hist		*new;
-
-	new = ft_memalloc(sizeof(t_hist));
-	new->old_line = cmd;
-	new->next = next;
-	new->prev = prev;
-	return (new);
-}
-
-t_hist					*read_history(t_env *env)
+static t_hist			*read_history(t_env *env)
 {
 	t_hist		*history;
 	t_hist		*tmp_hist;
 	char		*tmp;
-	t_data		*data;
 	int			fd;
 
+	fd = get_hist_fd(env);
+	if (fd == -1)
+		return (ft_memalloc(sizeof(t_hist)));
 	history = ft_memalloc(sizeof(t_hist));
 	tmp_hist = history;
-	if (!(data = get_anything(env, "HOME")))
-		tmp = "";
-	else
-		tmp = ft_strjoin(data->content, "/.history");
-	if ((fd = open(tmp, O_RDONLY)) == -1)
-	{
-		ft_putstr_fd("history unavailable\n", 2);
-		return (history);
-	}
 	while (get_next_line(fd, &tmp) == 1)
 	{
-		tmp_hist->prev = add_hist(to_line(tmp), tmp_hist, NULL);
+		tmp_hist->prev = generate_hist(to_line(tmp), tmp_hist, NULL);
 		tmp_hist = tmp_hist->prev;
 	}
 	close(fd);
 	return (history);
 }
 
-void					write_history(t_hist *hist, t_env *env)
+static void				write_history(t_hist *hist, t_env *env)
 {
 	int		fd;
 	char	*tmp;
@@ -112,9 +87,10 @@ void					write_history(t_hist *hist, t_env *env)
 		tmp = ft_strjoin(data->content, "/.history");
 	if ((fd = open(tmp, O_WRONLY | O_TRUNC | O_CREAT)) == -1)
 		ft_putstr_fd("history unavailable\n", 2);
+	hist = hist->prev;
 	while (hist)
 	{
-		tmp = to_string(get_first(hist->old_line));
+		tmp = to_string(get_first_line(hist->old_line));
 		tmp2 = tmp;
 		tmp = ft_strjoin(tmp, "\n");
 		free(tmp2);
@@ -122,4 +98,30 @@ void					write_history(t_hist *hist, t_env *env)
 		free(tmp);
 		hist = hist->prev;
 	}
+}
+
+t_line					*history(int query, t_line *line)
+{
+	static t_hist		*history = NULL;
+	static t_line		*ori_line = NULL;
+
+	if (query == SAVE_LINE)
+		ori_line = line;
+	else if (query == READ_HIST)
+		history = read_history(get_t_env(NULL));
+	else if (query == NEXT_HIST && history->next)
+		history = history->next;
+	else if (query == PREV_HIST && history->prev)
+		history = history->prev;
+	else if (query == WRITE_HIST)
+		write_history(history, get_t_env(NULL));
+	else if (query == FIRST_HIST)
+		history = get_first_hist(history);
+	else if (query == ADD_HIST)
+		create_new_hist(&history, line);
+	if (query == NEXT_HIST && !(history->old_line))
+		return (ori_line);
+	if (query == NEXT_HIST || query == PREV_HIST)
+		return (cpy_line(get_first_line(history->old_line)));
+	return (NULL);
 }

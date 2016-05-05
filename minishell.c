@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 03:18:11 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/04 18:23:16 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/05 21:36:20 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ static void	before_loop_prompt2(t_env *e, int cmd, char **line, char **new_line)
 int			loop_prompt(t_env *e)
 {
 	char	*line;
+	t_line	*add_to_hist;
 	char	*new_line;
 
 	line = NULL;
@@ -114,7 +115,10 @@ int			loop_prompt(t_env *e)
 		if (e->backup == 1)
 			reverse_datacpy(&e);
 		display_prompt(e);
-		line = edit_line(&(e->le));
+		add_to_hist = edit_line(&(e->le));
+		history(FIRST_HIST, NULL);
+		history(ADD_HIST, add_to_hist);
+		line = to_string(add_to_hist);
 		e->total_nb_cmd = get_nb_cmd(line);
 		before_loop_prompt2(e, 0, &line, &new_line);
 	}

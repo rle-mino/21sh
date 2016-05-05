@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 04:20:03 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/04 18:57:01 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/05 22:18:54 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,44 +55,23 @@ static void		move_right(t_le *le, t_line **line)
 	}
 }
 
-t_line			*history(int query, t_line *line)
-{
-	static t_hist		*history = NULL;
-
-	if (query == RUP_HIST)
-		history->old_line = line;
-	else if (query == READ_HIST)
-		history = read_history(get_t_env(NULL));
-	else if (query == NEXT_HIST && history->next)
-		history = history->next;
-	else if (query == PREV_HIST && history->prev)
-		history = history->prev;
-	else if (query == WRITE_HIST)
-		write_history(history, get_t_env(NULL));
-	else if (query == FIRST_HIST)
-		while (history->next)
-			history = history->next;
-	else if (query == ADD_HIST)
-	{
-		history->next = add_hist(line, NULL, history);
-		history = history->next;
-	}
-	return (history->old_line);
-}
-
 void			move_cursor(t_le *le, int dir, t_line **line)
 {
 	void	*o;
+	t_line	*tmp;
 
 	o = NULL;
 	if (dir == 2 || dir == 3)
 	{
 		move_to_first(le, line);
 		tputs(tgetstr("cd", NULL), 1, ft_putint);
+		tmp = get_first_line(le->line);
 		le->line = dir == 2 ? history(PREV_HIST, *line) : history(NEXT_HIST, o);
+		if (!tmp->is_orig)
+			clear_line(tmp);
 		redisplay_line(le->line);
 		le->pos_x = linelen(le->line);
-		*line = get_last(le->line);
+		*line = get_last_line(le->line);
 	}
 	else if (dir == 1)
 		move_left(le, line);

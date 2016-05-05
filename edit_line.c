@@ -6,13 +6,13 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 02:45:11 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/04 19:10:30 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/05 22:19:12 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tos.h"
 
-char				*to_string(t_line *line)
+char			*to_string(t_line *line)
 {
 	char	buffer[2];
 	char	*string;
@@ -72,14 +72,15 @@ void			delete_char(t_le *le, t_line **line, char c)
 	delete_char_display(&((*line)->next));
 }
 
-char				*edit_line(t_le *le)
+t_line			*edit_line(t_le *le)
 {
 	char	buffer[6];
 
 	le->pos_x = 4;
-	if (!(le->line = ft_memalloc(sizeof(t_line))))
-		ft_error(MALLER);
-	history(RUP_HIST, le->line);
+	le->line = ft_memalloc(sizeof(t_line));
+	le->line->is_orig = 1;
+	history(SAVE_LINE, le->line);
+	history(FIRST_HIST, NULL);
 	while (42)
 	{
 		margin(le);
@@ -93,5 +94,5 @@ char				*edit_line(t_le *le)
 			break ;
 		}
 	}
-	return (to_string(get_first(le->line)));
+	return (get_first_line(le->line));
 }

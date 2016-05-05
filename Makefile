@@ -6,7 +6,7 @@
 #    By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/25 23:31:13 by rle-mino          #+#    #+#              #
-#    Updated: 2016/05/04 18:37:03 by rle-mino         ###   ########.fr        #
+#    Updated: 2016/05/05 22:09:42 by rle-mino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,12 +31,14 @@ SRC		=				actualise_env.c 			\
 						get2.c						\
 						get_env_var.c				\
 						history.c					\
+						history2.c					\
 						init_term.c					\
 						main.c						\
 						minishell.c					\
 						move.c						\
 						move2.c						\
 						multi_command.c				\
+						line.c						\
 						my_exit.c					\
 						my_set_env.c				\
 						parsing.c					\
@@ -52,7 +54,7 @@ SRC		=				actualise_env.c 			\
 
 OBJ		=				$(SRC:.c=.o)
 
-FLAGS	=			 	-Wall -Wextra -Werror
+FLAGS	=			 	-g3 -Wall -Wextra -Werror
 
 .PHONY: all, clean, fclean, re
 

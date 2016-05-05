@@ -6,16 +6,23 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 03:12:34 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/04 15:15:20 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/05 22:17:51 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tos.h"
 
-t_line		*get_last(t_line *line)
+t_line		*get_last_line(t_line *line)
 {
 	while (line->next)
 		line = line->next;
+	return (line);
+}
+
+t_line		*get_first_line(t_line *line)
+{
+	while (line->prev)
+		line = line->prev;
 	return (line);
 }
 
@@ -30,13 +37,6 @@ int			linelen(t_line *line)
 		line = line->next;
 	}
 	return (i);
-}
-
-t_line		*get_first(t_line *line)
-{
-	while (line->prev)
-		line = line->prev;
-	return (line);
 }
 
 int			get_fd(int fd)

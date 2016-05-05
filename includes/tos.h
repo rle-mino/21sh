@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:40:16 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/04 18:52:43 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/05 22:18:08 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ enum
 	NEXT_HIST,
 	PREV_HIST,
 	FIRST_HIST,
+	SECOND_HIST,
 	ADD_HIST,
-	RUP_HIST
+	SAVE_LINE
 };
 
 enum
@@ -55,6 +56,7 @@ typedef struct			s_line_edit
 	struct s_line_edit	*prev;
 	int					x;
 	int					y;
+	int					is_orig;
 	char				c;
 }						t_line;
 
@@ -131,7 +133,7 @@ int						check_end_window(int winsize);
 ***		LINE EDIT
 ***
 */
-char					*edit_line(t_le *le);
+t_line					*edit_line(t_le *le);
 int						ft_is_arrow(char *buffer);
 int						ft_is_del_or_back(char *buffer);
 void					get_pos_cursor(int *x, int *y);
@@ -140,13 +142,13 @@ void					delete_char_display(t_line **line);
 void					redisplay_line(t_line *line);
 int						linelen(t_line *line);
 void					move_to_first(t_le *le, t_line **line);
-t_line					*get_last(t_line *line);
 void					margin(t_le *le);
 void					move_left(t_le *le, t_line **line);
 char					*to_string(t_line *line);
 int						ft_putint(int c);
 void					move_cursor(t_le *le, int dir, t_line **line);
-t_line					*get_first(t_line *line);
+t_line					*get_last_line(t_line *line);
+t_line					*get_first_line(t_line *line);
 void					add_to_line(t_le *le, t_line **line, char n);
 void					delete_char(t_le *le, t_line **line, char c);
 void					parse_buffer(char *buffer, t_le *le);
@@ -154,10 +156,13 @@ void					parse_buffer(char *buffer, t_le *le);
 ***		history
 */
 t_line					*history(int query, t_line *line);
-t_hist					*read_history(t_env *env);
-void					write_history(t_hist *hist, t_env *env);
 void					*clear_hist(t_hist *hist);
-t_hist					*add_hist(t_line *cmd, t_hist *next, t_hist *prev);
+t_hist					*generate_hist(t_line *cmd, t_hist *next, t_hist *prev);
 t_line					*to_line(char *cmd);
+t_line					*cpy_line(t_line *line);
+void					clear_line(t_line *line);
+int						get_hist_fd(t_env *env);
+t_hist					*get_first_hist(t_hist *hist);
+void					create_new_hist(t_hist **history, t_line *line);
 
 #endif
