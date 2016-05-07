@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/05 21:09:40 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/05 22:15:41 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/07 14:39:12 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void		create_new_hist(t_hist **history, t_line *line)
 	{
 		(*history)->prev = generate_hist(line, *history, (*history)->prev);
 		*history = (*history)->prev;
-		if ((*history)->prev->prev)
+		if ((*history)->prev && (*history)->prev->prev)
 			(*history)->prev->next = *history;
 	}
 }

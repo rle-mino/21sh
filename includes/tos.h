@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:40:16 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/05 22:18:08 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/06 19:14:15 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,14 @@ typedef struct			s_env
 	t_le				le;
 	int					total_nb_cmd;
 }						t_env;
+
+typedef struct			s_pair
+{
+	char				*prompt;
+	int					c_or_s;
+	char				find_char;
+	char				*find_string;
+}						t_pair;
 
 int						env_sw(void);
 int						get_fd(int fd);

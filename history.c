@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/01 12:06:40 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/05 22:18:31 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/07 14:54:26 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void				write_history(t_hist *hist, t_env *env)
 		tmp = "";
 	else
 		tmp = ft_strjoin(data->content, "/.history");
-	if ((fd = open(tmp, O_WRONLY | O_TRUNC | O_CREAT)) == -1)
+	if ((fd = open(tmp, O_RDWR | O_TRUNC | O_CREAT, 0644)) == -1)
 		ft_putstr_fd("history unavailable\n", 2);
 	hist = hist->prev;
 	while (hist)
@@ -119,7 +119,7 @@ t_line					*history(int query, t_line *line)
 		history = get_first_hist(history);
 	else if (query == ADD_HIST)
 		create_new_hist(&history, line);
-	if (query == NEXT_HIST && !(history->old_line))
+	if ((query == NEXT_HIST || query == PREV_HIST) && !(history->old_line))
 		return (ori_line);
 	if (query == NEXT_HIST || query == PREV_HIST)
 		return (cpy_line(get_first_line(history->old_line)));
