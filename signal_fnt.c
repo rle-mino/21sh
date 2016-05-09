@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/01 13:38:26 by ishafie           #+#    #+#             */
-/*   Updated: 2016/04/03 02:43:43 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/07 21:41:34 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void		seg_exit(void)
 {
-	ft_putstr("minishell: segmentation fault  ");
-	ft_putendl(g_name_prog);
+	ft_putstr_fd("minishell: segmentation fault  ", 2);
+	ft_putendl_fd(g_name_prog, 2);
 }
 
 void			safe_exit(int a)
@@ -25,9 +25,7 @@ void			safe_exit(int a)
 	c = 0;
 	if (a == SIGINT)
 	{
-		write(1, "\b \b", 3);
-		write(1, "\b \b", 3);
-		write(1, &c, 1);
+		return ;
 	}
 	if (a == SIGSEGV)
 		seg_exit();

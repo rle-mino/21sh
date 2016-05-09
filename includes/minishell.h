@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 04:57:37 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/04 14:10:10 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/09 19:12:21 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,45 @@
 
 char					*g_name_prog;
 
+//ajout
+
+int						exec_easy(t_env *e, t_cmd *comd);
+
+void					free_cmd(t_env *e);
+void					free_tab(char **str);
+
+/*
+***		REDIRECTION
+*/
+int						redirection_cmd(t_env *e, char **line);
+int						redirection_error(char **line, int i);
+int						find_redir_str(char **str, char **redir);
+
+/*
+***		STRUCT COMMAND
+*/
+t_cmd					*create_cmd(char *str);
+void					create_all_cmds(t_env *e, char *str);
+void					add_back_cmd(t_cmd **cmd, char *arg);
+void					free_any_cmd(t_env *e, char **str, int i);
+
+void					replace_cmd(t_env **e);
+
+void					free_first_cmd(char ***str, int i);
+void					add_to_cmd(char **arg, t_cmd **comd);
+
 /*
 ***		MULTI COMMAND
 */
 int						get_nb_cmd(char *line);
 void					actualise_command(char **line, char **new_line,
 						int cmd, int n_cmd);
+
+/*
+***		PIPE
+*/
+int						find_pipe(char *str);
+int						recur_pipouz(t_env *e, t_cmd *comd, int i);
 
 void					safe_exit(int a);
 

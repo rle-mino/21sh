@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 16:50:35 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/02 16:48:45 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/07 21:40:11 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_data			*create_data(char *content, char *prefix)
 	tmp = (t_data*)malloc(sizeof(t_data));
 	if (!tmp)
 	{
-		ft_putstr_fd("Allocation failure, exiting..\n", 3);
+		ft_putstr_fd("Allocation failure, exiting..\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	tmp->content = ft_strdup(content);
@@ -92,5 +92,8 @@ t_env			*create_env(char **env)
 	tmp->backup = 0;
 	tmp->data_backup = NULL;
 	tmp->total_nb_cmd = 1;
+	tmp->comd = NULL;
+	tmp->nb_pipe = 0;
+	tmp->ptr_first_cmd = NULL;
 	return (tmp);
 }

@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 22:36:55 by ishafie           #+#    #+#             */
-/*   Updated: 2016/04/03 05:05:16 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/07 21:18:42 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void				change_directory(t_env *e, char **args, char *line)
 {
 	if (args && args[0] && args[1] && args[2] && args[3])
 	{
-		ft_putstr("cd: too many arguments\n");
+		ft_putstr_fd("cd: too many arguments\n", 2);
 		return ;
 	}
 	if (parse_args(e, args, line) == 1)

@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 00:56:10 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/04 17:02:31 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/07 21:22:52 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,8 @@ int				reset_term(struct termios reset)
 static void		init_fd(t_le *e)
 {
 	int				fd;
-	char			*str;
 
-	str = ttyname(2);
-	fd = open(str, O_RDWR);
+	fd = open("/dev/tty", O_RDWR);
 	if (fd == -1)
 		fd = 2;
 	e->fd = fd;
@@ -72,11 +70,8 @@ void			calc_col(t_le *e)
 {
 	struct winsize	win;
 	int				fd;
-	char			*str;
 
-	str = NULL;
-	str = ttyname(0);
-	fd = open(str, O_RDWR);
+	fd = open("/dev/tty", O_RDWR);
 	if (fd == -1)
 		ioctl(0, TIOCGWINSZ, &win);
 	else
@@ -92,4 +87,5 @@ void			init_env(t_le *e, t_env *env)
 	calc_col(e);
 	get_pos_cursor(&(e->pos_x), &(e->pos_y));
 	history(READ_HIST, NULL);
+	env->fd = get_fd(-1);
 }

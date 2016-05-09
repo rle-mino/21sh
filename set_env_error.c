@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/02 23:32:54 by ishafie           #+#    #+#             */
-/*   Updated: 2016/04/02 23:42:20 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/07 21:39:54 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int				unset_check(char **args)
 int				set_env_error(int a)
 {
 	if (a == 1)
-		ft_putstr("setenv: too many arguments\n");
+		ft_putstr_fd("setenv: too many arguments\n", 2);
 	else if (a == 0)
-		ft_putstr("unsetenv: too many arguments\n");
+		ft_putstr_fd("unsetenv: too many arguments\n", 2);
 	else if (a == 2)
-		ft_putstr("setenv: too few arguments\n");
+		ft_putstr_fd("setenv: too few arguments\n", 2);
 	else if (a == 3)
-		ft_putstr("unsetenv: too few arguments\n");
+		ft_putstr_fd("unsetenv: too few arguments\n", 2);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 16:40:55 by ishafie           #+#    #+#             */
-/*   Updated: 2016/04/27 04:20:59 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/07 21:29:37 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void	malloc_handling(void)
 
 int		error_path_not_found(char *str, char *line)
 {
-	ft_putstr("zsh : command not found: ");
-	ft_putstr(line);
-	ft_putstr(" and more than that ");
-	ft_putstr(str);
-	ft_putstr(" can't be found either.\n");
+	ft_putstr_fd("zsh : command not found: ", 2);
+	ft_putstr_fd(line, 2);
+	ft_putstr_fd(" and more than that ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(" can't be found either.\n", 2);
 	return (-1);
 }
 
@@ -51,14 +51,14 @@ char	*error_not_found(char *line)
 	i = 0;
 	if (get_name(&line[1]) != 0)
 	{
-		ft_putstr("zsh: no such file or directory: ");
-		ft_putendl(&line[1]);
+		ft_putstr_fd("zsh: no such file or directory: ", 2);
+		ft_putendl_fd(&line[1], 2);
 		return (NULL);
 	}
-	ft_putstr("zsh: command not found: ");
+	ft_putstr_fd("zsh: command not found: ", 2);
 	i = get_name(line);
-	ft_putstr(&line[i]);
-	ft_putchar('\n');
+	ft_putstr_fd(&line[i], 2);
+	ft_putchar_fd('\n', 2);
 	return (NULL);
 }
 

@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   change_env_error.c                                 :+:      :+:    :+:   */
+/*   redirection_error.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/03 02:36:45 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/07 21:21:28 by ishafie          ###   ########.fr       */
+/*   Created: 2016/05/09 15:32:15 by ishafie           #+#    #+#             */
+/*   Updated: 2016/05/09 16:09:56 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			change_env_error(char **args)
+int			redirection_error(char **line, int a)
 {
-	ft_putstr_fd("env: illegal option -- ", 2);
-	ft_putendl_fd(args[1], 2);
-	ft_putendl_fd("usage: [-i] [-u name]", 2);
-	ft_putendl_fd("\t[name=value ...] [utility [argument ...]]", 2);
-	return (1);
+	struct stat		sb;
+	int				i;
+
+	i = -1;
+	ft_putstr_fd("42sh: ", 2);
+	ft_putstr_fd(line[a], 2);
+	if (lstat(line[a], &sb) == -1)
+		ft_putstr_fd(": Permission denied\n", 2);
+	else if (S_ISDIR(sb.st_mode))
+		ft_putstr_fd(": Is a directory\n", 2);
+	else if ((sb.st_mode & S_IWUSR) != 1)
+		ft_putstr_fd(": Permission denied\n", 2);
+	return (-1);
 }

@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   change_env_error.c                                 :+:      :+:    :+:   */
+/*   command_free.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/03 02:36:45 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/07 21:21:28 by ishafie          ###   ########.fr       */
+/*   Created: 2016/05/08 22:30:38 by ishafie           #+#    #+#             */
+/*   Updated: 2016/05/08 22:41:37 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			change_env_error(char **args)
+void		free_first_cmd(char ***str, int i)
 {
-	ft_putstr_fd("env: illegal option -- ", 2);
-	ft_putendl_fd(args[1], 2);
-	ft_putendl_fd("usage: [-i] [-u name]", 2);
-	ft_putendl_fd("\t[name=value ...] [utility [argument ...]]", 2);
-	return (1);
+	int		a;
+
+	if (!str || !*str || !(*str)[1] || !(*str)[2])
+		return ;
+	free((*str)[0]);
+	free((*str)[1]);
+	a = 0;
+	i = 2;
+	while ((*str)[i])
+	{
+		(*str)[a] = (*str)[i];
+		a++;
+		i++;
+	}
+	(*str)[a] = NULL;
 }

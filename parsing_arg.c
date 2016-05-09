@@ -6,11 +6,11 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 15:18:59 by ishafie           #+#    #+#             */
-/*   Updated: 2016/04/27 04:20:07 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/07 20:29:08 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "includes/minishell.h"
 
 static char			*exec_line(char *line)
 {
@@ -47,4 +47,23 @@ char				*check_line(char *line, t_env *e)
 		i++;
 	}
 	return (error_not_found(line));
+}
+
+int					exec_easy(t_env *e, t_cmd *comd)
+{
+	char			*path;
+	int				error;
+
+	error = 1;
+	if (!e || !e->comd || !e->comd->cmd)
+		return (-1);
+	if ((path = check_line(comd->cmd[0], e)) != NULL)
+	{
+		if (e && e->env)
+			free_env_tab(e->env);
+		actualise_env_tab(&e, comd->cmd);
+		if ((error = execve(path, comd->cmd, e->env)) == -1)
+			error_no_exec(comd->cmd[0]);
+	}
+	return (error);
 }

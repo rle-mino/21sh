@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:40:16 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/09 18:42:20 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/09 19:51:53 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,17 @@ typedef struct			s_hist
 	struct s_hist		*prev;
 }						t_hist;
 
+typedef struct			s_pair
+{
+	int					quote;
+	int					dquote;
+	int					subsh;
+	int					cursh;
+	int					bquote;
+}						t_pair;
+
+/* DO NOT CROSS THIS LINE dis iz mine*/
+
 typedef struct			s_arg
 {
 	char				*content;
@@ -106,9 +117,17 @@ typedef struct			s_path
 	struct s_path		*next;
 }						t_path;
 
+typedef struct			s_cmd
+{
+	char				**cmd;
+	struct s_cmd		*next;
+}						t_cmd;
+
 typedef struct			s_env
 {
 	t_data				*data;
+	t_cmd				*comd;
+	t_cmd				*ptr_first_cmd;
 	char				**env;
 	char				**path;
 	int					nb_env;
@@ -117,16 +136,9 @@ typedef struct			s_env
 	t_data				*data_backup;
 	t_le				le;
 	int					total_nb_cmd;
+	int					nb_pipe;
+	int					fd;
 }						t_env;
-
-typedef struct			s_pair
-{
-	int					quote;
-	int					dquote;
-	int					subsh;
-	int					cursh;
-	int					bquote;
-}						t_pair;
 
 int						env_sw(void);
 int						get_fd(int fd);

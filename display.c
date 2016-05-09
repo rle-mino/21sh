@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 17:18:45 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/02 16:55:15 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/07 21:25:08 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ void			ft_putstr_path_color(char *str)
 	while (str[i])
 	{
 		if (i == save)
-			ft_putstr(C_RED);
-		write(1, &str[i], 1);
+			ft_putstr_fd(C_RED, get_fd(-1));
+		write(get_fd(-1), &str[i], 1);
 		i++;
 	}
-	ft_putstr(STOP);
+	ft_putstr_fd(STOP, get_fd(-1));
 }
 
 int				display_env(t_env *env)
@@ -38,9 +38,9 @@ int				display_env(t_env *env)
 	tmp = (env)->data;
 	while (tmp)
 	{
-		ft_putstr(tmp->prefix);
-		ft_putstr("=");
-		ft_putendl(tmp->content);
+		ft_putstr_fd(tmp->prefix, env->fd);
+		ft_putstr_fd("=", env->fd);
+		ft_putendl_fd(tmp->content, env->fd);
 		tmp = tmp->next;
 	}
 	return (1);
@@ -52,15 +52,15 @@ static void		display_time(void)
 	char		*tim;
 	struct tm	*timeinfo;
 
-	ft_putstr(C_CYAN);
-	ft_putchar('[');
+	ft_putstr_fd(C_CYAN, get_fd(-1));
+	ft_putchar_fd('[', get_fd(-1));
 	time(&rawtime);
 	timeinfo = localtime(&rawtime);
 	tim = asctime(timeinfo);
 	ft_strclr(&tim[16]);
-	ft_putstr(&tim[11]);
-	ft_putstr("] ");
-	ft_putstr(STOP);
+	ft_putstr_fd(&tim[11], get_fd(-1));
+	ft_putstr_fd("] ", get_fd(-1));
+	ft_putstr_fd(STOP, get_fd(-1));
 }
 
 void			display_prompt(t_env *e)
@@ -69,17 +69,17 @@ void			display_prompt(t_env *e)
 
 	display_time();
 	tmp = get_usr(e);
-	ft_putstr(C_BLUE);
+	ft_putstr_fd(C_BLUE, e->fd);
 	if (tmp)
-		ft_putstr(tmp->content);
-	ft_putstr(C_CYAN);
-	ft_putstr(" ➪ ");
-	ft_putstr(STOP);
+		ft_putstr_fd(tmp->content, e->fd);
+	ft_putstr_fd(C_CYAN, e->fd);
+	ft_putstr_fd(" ➪ ", e->fd);
+	ft_putstr_fd(STOP, e->fd);
 	tmp = get_pwd(e);
-	ft_putstr(CL_CYAN);
+	ft_putstr_fd(CL_CYAN, e->fd);
 	if (tmp)
 		ft_putstr_path_color(&(tmp->content)[e->end_path]);
-	ft_putstr(CYAN);
-	ft_putstr("\n❯❯❯ ");
-	ft_putstr(STOP);
+	ft_putstr_fd(CYAN, e->fd);
+	ft_putstr_fd("\n❯❯❯ ", e->fd);
+	ft_putstr_fd(STOP, e->fd);
 }

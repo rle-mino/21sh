@@ -6,11 +6,11 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 03:18:11 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/08 23:44:48 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/09 19:38:06 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "includes/minishell.h"
 
 int			get_all_function(t_env *e, char ***args, char *line)
 {
@@ -42,20 +42,15 @@ int			get_all_function(t_env *e, char ***args, char *line)
 
 int			go_prompt(t_env *data_env, char **args)
 {
-	char	*path;
 	int		error;
 
 	error = 1;
-	if (args && args[0] != NULL)
+	if (data_env->comd && data_env->nb_pipe > 0)
+		error = recur_pipouz(data_env, data_env->comd, 0);
+	else if (args && args[0] != NULL && data_env->comd)
 	{
-		if ((path = check_line(args[0], data_env)) != NULL)
-		{
-			if (data_env && data_env->env)
-				free_env_tab(data_env->env);
-			actualise_env_tab(&data_env, args);
-			if ((error = execve(path, args, data_env->env)) == -1)
-				error_no_exec(args[0]);
-		}
+		if (redirection_cmd(data_env, data_env->comd->cmd) != -1)
+			error = exec_easy(data_env, data_env->comd);
 	}
 	if (args)
 		free_args(args);
@@ -72,8 +67,10 @@ int			loop_prompt2(t_env *data_env, char *line)
 
 	i = 0;
 	error = 1;
+	create_all_cmds(data_env, line);
 	args = get_args(data_env, line);
-	if (get_all_function(data_env, &args, line) == 0)
+	if (get_all_function(data_env, &args, line) == 0
+	|| data_env->nb_pipe > 0)
 	{
 		father = fork();
 		if (father == 0)
@@ -88,12 +85,36 @@ int			loop_prompt2(t_env *data_env, char *line)
 	return (1);
 }
 
+/*void disp_cmd(t_cmd *comd)  to delete, just testing
+{
+	int		i;
+	t_cmd	*tmp;
+
+	tmp = comd;
+	i = 0;
+	while (tmp)
+	{
+		while (tmp->cmd[i])
+		{
+			dprintf(2, "[%s]\n", tmp->cmd[i]);
+			i++;
+		}
+		dprintf(2, "\n");
+		i = 0;
+		tmp = tmp->next;
+	}
+}
+*/
+
 static void	before_loop_prompt2(t_env *e, int cmd, char **line, char **new_line)
 {
 	while (*line && cmd < e->total_nb_cmd)
 	{
+		if (e->ptr_first_cmd)
+			free_cmd(e);
 		if (e->total_nb_cmd > 1)
 			actualise_command(line, new_line, cmd, e->total_nb_cmd);
+		e->nb_pipe = find_pipe(*line);
 		if (check_before_exec(*line) == 1)
 			loop_prompt2(e, *line);
 		if (e->total_nb_cmd <= 1)

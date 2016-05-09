@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 17:47:49 by ishafie           #+#    #+#             */
-/*   Updated: 2016/04/03 04:25:56 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/07 21:30:43 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int			error_no_exec(char *tmp)
 	int		i;
 
 	i = get_name(tmp);
-	ft_putstr("zsh: exec format error: ");
-	ft_putstr(&tmp[i]);
-	ft_putchar('\n');
+	ft_putstr_fd("zsh: exec format error: ", 2);
+	ft_putstr_fd(&tmp[i], 2);
+	ft_putchar_fd('\n', 2);
 	return (-1);
 }
 
@@ -33,9 +33,9 @@ char		*error_exe(char *tmp)
 		return (NULL);
 	if (!(S_IXUSR & sb.st_mode))
 	{
-		ft_putstr("zsh: permission denied: ");
-		ft_putstr(&tmp[i]);
-		ft_putchar('\n');
+		ft_putstr_fd("zsh: permission denied: ", 2);
+		ft_putstr_fd(&tmp[i], 2);
+		ft_putchar_fd('\n', 2);
 	}
 	return (NULL);
 }

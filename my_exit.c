@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/02 23:44:41 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/05 21:37:02 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/07 21:34:59 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 static int			my_exit_error(int a)
 {
 	if (a == 0)
-		ft_putstr("exit: too many arguments\n");
+		ft_putstr_fd("exit: too many arguments\n", 2);
 	else if (a == 1)
 		exit(0);
 	else if (a == 2)
 	{
-		ft_putstr("exit: number truncated after 10 digits\n");
+		ft_putstr_fd("exit: number truncated after 10 digits\n", 2);
 		exit(0);
 	}
 	return (1);
