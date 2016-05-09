@@ -6,12 +6,16 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/01 12:06:40 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/07 14:54:26 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/09 17:47:18 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tos.h"
 #include "minishell.h"
+
+/*
+***		Gestion complete de l'historique
+*/
 
 t_line					*to_line(char *cmd)
 {
@@ -53,6 +57,11 @@ void					*clear_hist(t_hist *hist)
 	return (NULL);
 }
 
+/*
+***		lit, si possible, un fichier a la racine de la session
+***		et en fait une liste chainee
+*/
+
 static t_hist			*read_history(t_env *env)
 {
 	t_hist		*history;
@@ -73,6 +82,11 @@ static t_hist			*read_history(t_env *env)
 	close(fd);
 	return (history);
 }
+
+/*
+***		Ecrit dans un ficher a la racine de la session
+***		l'integralite de l'historique
+*/
 
 static void				write_history(t_hist *hist, t_env *env)
 {
@@ -99,6 +113,10 @@ static void				write_history(t_hist *hist, t_env *env)
 		hist = hist->prev;
 	}
 }
+
+/*
+***		Switch pour controler l'historique
+*/
 
 t_line					*history(int query, t_line *line)
 {

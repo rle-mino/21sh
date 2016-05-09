@@ -6,11 +6,15 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 18:16:44 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/03 23:40:34 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/09 18:43:29 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tos.h"
+
+/*
+***		Changement visuel de l'edition de ligne
+*/
 
 void			margin(t_le *le)
 {
@@ -55,6 +59,30 @@ void			delete_char_display(t_line **line)
 	tputs(tgetstr("cd", NULL), 1, ft_putint);
 	redisplay_line(*line);
 	tputs(tgetstr("rc", NULL), 1, ft_putint);
+}
+
+int				redisplay_line_index(t_line *line, t_le *le)
+{
+	t_line	*tmp;
+	char	area[1024];
+	int		i;
+	int		x;
+
+	i = 0;
+	x = 4;
+	tmp = line;
+	while (tmp)
+	{
+		if (x == le->w_sizex)
+			x = 0;
+		area[i] = tmp->c;
+		tmp = tmp->next;
+		i++;
+		x++;
+	}
+	area[i] = 0;
+	write(get_fd(-1), area, i);
+	return (x);
 }
 
 void			redisplay_line(t_line *line)

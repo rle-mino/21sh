@@ -6,7 +6,7 @@
 #    By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/25 23:31:13 by rle-mino          #+#    #+#              #
-#    Updated: 2016/05/05 22:09:42 by rle-mino         ###   ########.fr        #
+#    Updated: 2016/05/08 22:42:31 by rle-mino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,9 @@ SRC		=				actualise_env.c 			\
 						display.c					\
 						display_line.c				\
 						edit_line.c					\
+						edit_line_pairing.c			\
 						error.c						\
+						pairing.c					\
 						error_rwx.c					\
 						free_memory.c				\
 						ft_putint.c					\

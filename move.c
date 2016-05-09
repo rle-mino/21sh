@@ -6,11 +6,17 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 04:20:03 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/05 22:18:54 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/09 19:05:29 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tos.h"
+
+/*
+***		Deplacement du curseur
+***		ET
+***		Recuperation des commandes precedentes et suivante via history()
+*/
 
 void			move_left(t_le *le, t_line **line)
 {
@@ -18,13 +24,13 @@ void			move_left(t_le *le, t_line **line)
 	char	*buffer2;
 
 	buffer2 = buffer;
-	if ((*line)->prev)
+	if ((*line)->prev && !(*line)->is_orig)
 	{
 		*line = (*line)->prev;
 		if (le->pos_x == 0)
 		{
 			tputs(tgetstr("up", &buffer2), 1, ft_putint);
-			while (le->pos_x++ < le->w_sizex)
+			while (le->pos_x++ < le->w_sizex - 1)
 				tputs(tgetstr("nd", &buffer2), 1, ft_putint);
 			le->pos_x--;
 		}
@@ -36,7 +42,7 @@ void			move_left(t_le *le, t_line **line)
 	}
 }
 
-static void		move_right(t_le *le, t_line **line)
+void			move_right(t_le *le, t_line **line)
 {
 	char	buffer[1024];
 	char	*buffer2;
@@ -44,7 +50,7 @@ static void		move_right(t_le *le, t_line **line)
 	buffer2 = buffer;
 	if ((*line)->next)
 	{
-		if (le->pos_x == (le->w_sizex) && !(le->pos_x = 0))
+		if (le->pos_x == (le->w_sizex - 1) && !(le->pos_x = 0))
 			tputs(tgetstr("do", &buffer2), 1, ft_putint);
 		else
 		{
@@ -69,8 +75,7 @@ void			move_cursor(t_le *le, int dir, t_line **line)
 		le->line = dir == 2 ? history(PREV_HIST, *line) : history(NEXT_HIST, o);
 		if (!tmp->is_orig)
 			clear_line(tmp);
-		redisplay_line(le->line);
-		le->pos_x = linelen(le->line);
+		le->pos_x = redisplay_line_index(le->line, le) - 1;
 		*line = get_last_line(le->line);
 	}
 	else if (dir == 1)

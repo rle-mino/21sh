@@ -6,11 +6,15 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 02:45:11 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/05 22:19:12 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/09 17:46:20 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tos.h"
+
+/*
+***		Gestion complete de l'edition de line
+*/
 
 char			*to_string(t_line *line)
 {
@@ -31,6 +35,10 @@ char			*to_string(t_line *line)
 	}
 	return (string);
 }
+
+/*
+***		Changement interne de l'edition de ligne
+*/
 
 void			add_to_line(t_le *le, t_line **line, char n)
 {
@@ -54,7 +62,7 @@ void			delete_char(t_le *le, t_line **line, char c)
 	t_line		*tmp;
 
 	tmp = *line;
-	if (!*line || !(*line)->prev)
+	if (!*line || !(*line)->prev || (*line)->is_orig)
 		return ;
 	if (tmp->prev)
 		tmp->prev->next = tmp->next;
@@ -71,6 +79,11 @@ void			delete_char(t_le *le, t_line **line, char c)
 		*line = (*line)->next;
 	delete_char_display(&((*line)->next));
 }
+
+/*
+***		Fonction principale de l'edition de ligne
+***		Retourne le commande finale sous forme de liste chainee
+*/
 
 t_line			*edit_line(t_le *le)
 {
@@ -94,5 +107,8 @@ t_line			*edit_line(t_le *le)
 			break ;
 		}
 	}
+	le->line = get_last_line(le->line);
+	if ((le->prompt = missing_pair(get_first_line(le->line))))
+		edit_line_pairing(le, le->prompt);
 	return (get_first_line(le->line));
 }

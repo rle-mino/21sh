@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:40:16 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/06 19:14:15 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/09 18:42:20 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct			s_line_edit
 	int					y;
 	int					is_orig;
 	char				c;
+	int					paired;
 }						t_line;
 
 typedef struct			s_le
@@ -68,6 +69,7 @@ typedef struct			s_le
 	int					pos_x;
 	int					pos_y;
 	t_line				*line;
+	char				*prompt;
 }						t_le;
 
 typedef struct			s_hist
@@ -119,10 +121,11 @@ typedef struct			s_env
 
 typedef struct			s_pair
 {
-	char				*prompt;
-	int					c_or_s;
-	char				find_char;
-	char				*find_string;
+	int					quote;
+	int					dquote;
+	int					subsh;
+	int					cursh;
+	int					bquote;
 }						t_pair;
 
 int						env_sw(void);
@@ -147,11 +150,13 @@ int						ft_is_del_or_back(char *buffer);
 void					get_pos_cursor(int *x, int *y);
 void					add_to_line_display(t_le *le, t_line **line);
 void					delete_char_display(t_line **line);
+int						redisplay_line_index(t_line *line, t_le *le);
 void					redisplay_line(t_line *line);
 int						linelen(t_line *line);
 void					move_to_first(t_le *le, t_line **line);
 void					margin(t_le *le);
 void					move_left(t_le *le, t_line **line);
+void					move_right(t_le *le, t_line **line);
 char					*to_string(t_line *line);
 int						ft_putint(int c);
 void					move_cursor(t_le *le, int dir, t_line **line);
@@ -160,6 +165,12 @@ t_line					*get_first_line(t_line *line);
 void					add_to_line(t_le *le, t_line **line, char n);
 void					delete_char(t_le *le, t_line **line, char c);
 void					parse_buffer(char *buffer, t_le *le);
+/*
+***		pairs
+*/
+char					*missing_pair(t_line *line);
+t_line					*edit_line_pairing(t_le *le, char *prompt);
+void					parse_buffer_pairing(char *buffer, t_le *le);
 /*
 ***		history
 */

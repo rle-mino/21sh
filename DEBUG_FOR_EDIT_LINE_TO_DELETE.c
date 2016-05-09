@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get2.c                                             :+:      :+:    :+:   */
+/*   DEBUG_FOR_EDIT_LINE_TO_DELETE.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/04 12:02:03 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/09 17:46:58 by rle-mino         ###   ########.fr       */
+/*   Created: 2016/05/09 19:04:30 by rle-mino          #+#    #+#             */
+/*   Updated: 2016/05/09 19:05:17 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tos.h"
 
-t_env		*get_t_env(t_env *env)
+void			show_me_cursor(t_le *le)
 {
-	static t_env	*ori_env = NULL;
-
-	if (!ori_env)
-		ori_env = env;
-	return (ori_env);
+	tputs(tgetstr("sc", NULL), 1, ft_putint);
+	tputs(tgoto(tgetstr("cm", NULL), 1, 1), 1, ft_putint);
+	fpf("le->pos_x = %d", le->pos_x);
+	tputs(tgetstr("rc", NULL), 1, ft_putint);
 }
