@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 17:09:47 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/10 20:36:56 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/10 23:02:48 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,14 @@ void		parse_buffer(char *buffer, t_le *le)
 	else if (ft_is_del_or_back(buffer))
 		delete_char(le, &(le->line), buffer[0]);
 	else if (buffer[0] == 033 && buffer[1] == 033 && buffer[2] == '[' &&
-															buffer[3] == 'D')
-		move_to_word(LEFT, le);
+										(buffer[3] == 'D' || buffer[3] == 'C'))
+		move_to_word(buffer[3] == 'D' ? LEFT : RIGHT, le);
 	else if (buffer[0] == 033 && buffer[1] == 033 && buffer[2] == '[' &&
-															buffer[3] == 'C')
-		move_to_word(RIGHT, le);
+										(buffer[3] == 'A' || buffer[3] == 'B'))
+		move_vertically(buffer[3] == 'A' ? UP : DOWN, le);
+	else if (buffer[0] == 033 && buffer[1] == '[' &&
+										(buffer[2] == 'H' || buffer[2] == 'F'))
+		move_to_extrem(buffer[2] == 'H' ? LEFT : RIGHT, le);
 }
 
 void		parse_buffer_pairing(char *buffer, t_le *le)
@@ -42,4 +45,10 @@ void		parse_buffer_pairing(char *buffer, t_le *le)
 		move_right(le, &(le->line));
 	else if (ft_is_del_or_back(buffer))
 		delete_char(le, &(le->line), buffer[0]);
+	else if (buffer[0] == 033 && buffer[1] == 033 && buffer[2] == '[' &&
+										(buffer[3] == 'D' || buffer[3] == 'C'))
+		move_to_word(buffer[3] == 'D' ? LEFT : RIGHT, le);
+	else if (buffer[0] == 033 && buffer[1] == '[' &&
+										(buffer[2] == 'H' || buffer[2] == 'F'))
+		move_to_extrem(buffer[2] == 'H' ? LEFT : RIGHT, le);
 }

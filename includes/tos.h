@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:40:16 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/10 20:36:52 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/10 22:24:14 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,8 @@ void					margin(t_le *le);
 void					move_left(t_le *le, t_line **line);
 void					move_right(t_le *le, t_line **line);
 void					move_to_word(int dir, t_le *le);
+void					move_vertically(int dir, t_le *le);
+void					move_to_extrem(int dir, t_le *le);
 char					*to_string(t_line *line);
 int						ft_putint(int c);
 void					move_cursor(t_le *le, int dir, t_line **line);
