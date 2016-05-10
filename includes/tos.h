@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:40:16 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/09 19:51:53 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/10 16:12:35 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ enum
 	GET_TERM
 };
 
+/*
+***		structs for line editing
+*/
+
 typedef struct			s_line_edit
 {
 	struct s_line_edit	*next;
@@ -89,7 +93,9 @@ typedef struct			s_pair
 	int					bquote;
 }						t_pair;
 
-/* DO NOT CROSS THIS LINE dis iz mine*/
+/*
+***		structs for command execution and env
+*/
 
 typedef struct			s_arg
 {
@@ -156,14 +162,15 @@ int						check_end_window(int winsize);
 ***		LINE EDIT
 ***
 */
+void					show_me_cursor(t_le *le);
 t_line					*edit_line(t_le *le);
 int						ft_is_arrow(char *buffer);
 int						ft_is_del_or_back(char *buffer);
 void					get_pos_cursor(int *x, int *y);
 void					add_to_line_display(t_le *le, t_line **line);
-void					delete_char_display(t_line **line);
+void					delete_char_display(t_line **line, t_le *le);
 int						redisplay_line_index(t_line *line, t_le *le);
-void					redisplay_line(t_line *line);
+void					redisplay_line(t_line *line, t_le *le);
 int						linelen(t_line *line);
 void					move_to_first(t_le *le, t_line **line);
 void					margin(t_le *le);

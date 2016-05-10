@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 02:45:11 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/09 17:46:20 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/10 16:11:57 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void			delete_char(t_le *le, t_line **line, char c)
 		move_cursor(le, LEFT, line);
 	else if (*line && (*line)->next)
 		*line = (*line)->next;
-	delete_char_display(&((*line)->next));
+	delete_char_display(&((*line)->next), le);
 }
 
 /*
@@ -96,7 +96,6 @@ t_line			*edit_line(t_le *le)
 	history(FIRST_HIST, NULL);
 	while (42)
 	{
-		margin(le);
 		ft_bzero(buffer, sizeof(buffer));
 		read(0, buffer, 5);
 		parse_buffer(buffer, le);

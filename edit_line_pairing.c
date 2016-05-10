@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 19:04:52 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/09 17:46:15 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/10 16:14:57 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ t_line				*edit_line_pairing(t_le *le, char *prompt)
 	create_first_line(le);
 	while (42)
 	{
-		margin(le);
 		ft_bzero(buffer, sizeof(buffer));
 		read(0, buffer, 5);
 		parse_buffer_pairing(buffer, le);
