@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/01 12:06:40 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/09 17:47:18 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/10 19:15:41 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,15 @@ static t_hist			*read_history(t_env *env)
 	t_hist		*tmp_hist;
 	char		*tmp;
 	int			fd;
+	int			i;
 
 	fd = get_hist_fd(env);
+	i = 0;
 	if (fd == -1)
 		return (ft_memalloc(sizeof(t_hist)));
 	history = ft_memalloc(sizeof(t_hist));
 	tmp_hist = history;
-	while (get_next_line(fd, &tmp) == 1)
+	while (get_next_line(fd, &tmp) == 1 && i++ < 1000)
 	{
 		tmp_hist->prev = generate_hist(to_line(tmp), tmp_hist, NULL);
 		tmp_hist = tmp_hist->prev;

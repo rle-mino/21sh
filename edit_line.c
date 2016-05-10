@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 02:45:11 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/10 16:11:57 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/10 19:23:16 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,11 @@ t_line			*edit_line(t_le *le)
 		parse_buffer(buffer, le);
 		if (buffer[0] == '\n' && buffer[1] == 0)
 		{
-			le->pos_x = 0;
+			move_to_last(le, &(le->line));
 			tputs(tgetstr("do", NULL), 1, ft_putint);
 			break ;
 		}
 	}
-	le->line = get_last_line(le->line);
 	if ((le->prompt = missing_pair(get_first_line(le->line))))
 		edit_line_pairing(le, le->prompt);
 	return (get_first_line(le->line));

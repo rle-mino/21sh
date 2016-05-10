@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/05 21:09:40 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/09 17:47:46 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/10 19:34:11 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,21 @@
 ***		Gestion de l'historique
 */
 
-static int	empty_line(t_line *line)
+static int	invalid_line(t_line *line)
 {
+	int		valid;
+
+	valid = 0;
 	line = line->next;
 	while (line)
 	{
 		if (line->c != ' ' && line->c != '\0')
-			return (0);
+			valid = 1;
+		if (line->c == '\n')
+			return (1);
 		line = line->next;
 	}
-	return (1);
+	return (valid ? 0 : 1);
 }
 
 t_hist		*generate_hist(t_line *cmd, t_hist *next, t_hist *prev)
@@ -52,7 +57,7 @@ t_hist		*get_first_hist(t_hist *hist)
 
 void		create_new_hist(t_hist **history, t_line *line)
 {
-	if (linelen(line) > 1 && !empty_line(line))
+	if (linelen(line) > 1 && !invalid_line(line))
 	{
 		(*history)->prev = generate_hist(line, *history, (*history)->prev);
 		*history = (*history)->prev;
