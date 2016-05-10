@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 17:09:47 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/09 17:45:05 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/10 20:36:56 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ void		parse_buffer(char *buffer, t_le *le)
 		move_cursor(le, ft_is_arrow(buffer), &(le->line));
 	else if (ft_is_del_or_back(buffer))
 		delete_char(le, &(le->line), buffer[0]);
+	else if (buffer[0] == 033 && buffer[1] == 033 && buffer[2] == '[' &&
+															buffer[3] == 'D')
+		move_to_word(LEFT, le);
+	else if (buffer[0] == 033 && buffer[1] == 033 && buffer[2] == '[' &&
+															buffer[3] == 'C')
+		move_to_word(RIGHT, le);
 }
 
 void		parse_buffer_pairing(char *buffer, t_le *le)
