@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:40:16 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/10 22:24:14 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/11 20:12:23 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,7 @@ t_line					*get_first_line(t_line *line);
 void					add_to_line(t_le *le, t_line **line, char n);
 void					delete_char(t_le *le, t_line **line, char c);
 void					parse_buffer(char *buffer, t_le *le);
+void					clipboard_to_line(t_le *le);
 /*
 ***		pairs
 */

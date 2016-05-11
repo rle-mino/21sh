@@ -6,14 +6,14 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 17:09:47 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/10 23:02:48 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/11 20:19:29 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tos.h"
 
 /*
-***		Parsing du buffer
+***		Parsing du buffer pour l'edition de ligne standard
 */
 
 void		parse_buffer(char *buffer, t_le *le)
@@ -33,7 +33,15 @@ void		parse_buffer(char *buffer, t_le *le)
 	else if (buffer[0] == 033 && buffer[1] == '[' &&
 										(buffer[2] == 'H' || buffer[2] == 'F'))
 		move_to_extrem(buffer[2] == 'H' ? LEFT : RIGHT, le);
+	else if ((unsigned char)buffer[0] == 0xE2
+			&& (unsigned char)buffer[1] == 0x88 &&
+			(unsigned char)buffer[2] == 0x9A)
+		clipboard_to_line(le);
 }
+
+/*
+***		Parsing du buffer pour l'edition de ligne en appairage
+*/
 
 void		parse_buffer_pairing(char *buffer, t_le *le)
 {

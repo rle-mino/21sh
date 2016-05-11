@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 18:16:44 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/10 16:14:53 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/11 21:33:07 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void			add_to_line_display(t_le *le, t_line **line)
 
 void			delete_char_display(t_line **line, t_le *le)
 {
-	tputs(tgetstr("dc", NULL), 1, ft_putint);
+	tputs(tgetstr("cd", NULL), 1, ft_putint);
 	redisplay_line(*line, le);
 }
 
