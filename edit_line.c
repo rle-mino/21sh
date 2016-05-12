@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 02:45:11 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/11 22:11:29 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/12 20:32:56 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ char			*to_string(t_line *line)
 	char	*string;
 	char	*tmp;
 
-	if (!(string = ft_memalloc(1)))
-		ft_error(MALLER);
+	string = ft_memalloc(1);
 	while (line)
 	{
 		ft_bzero(buffer, sizeof(buffer));

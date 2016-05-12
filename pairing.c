@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/08 16:42:45 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/09 17:48:47 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/12 19:49:35 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,26 @@
 /*
 ***		Parsing d'appairage
 */
+
+static int		pipe_is_alone(t_line *line)
+{
+	while (line)
+	{
+		if (line->c == '|')
+		{
+			while (line)
+			{
+				if (line->c != ' ' && line->c != '\0' && line->c != '|')
+					break ;
+				line = line->next;
+			}
+			if (!line)
+				return (1);
+		}
+		line = line->next;
+	}
+	return (0);
+}
 
 static char		*pair_index(char *str)
 {
@@ -48,12 +68,14 @@ static int		search_pair(t_line *line, char f)
 
 char			*missing_pair(t_line *line)
 {
-	static char		prompts[5][10] = {"quote> ", "dquote> ", "subsh> ",\
-										"cursh> ", "bquote"};
+	static char		prompts[6][10] = {"quote> ", "dquote> ", "subsh> ",\
+										"cursh> ", "bquote> ", "pipe> "};
 	static char		missing[7] = "\'\"({`";
 	char			*find;
 	int				paired;
+	t_line			*first;
 
+	first = line;
 	while (line)
 	{
 		paired = 0;
@@ -65,5 +87,7 @@ char			*missing_pair(t_line *line)
 			line->paired = 1;
 		line = line->next;
 	}
+	if (pipe_is_alone(first))
+		return (prompts[5]);
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 12:02:03 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/09 17:46:58 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/12 20:28:14 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,11 @@ t_env		*get_t_env(t_env *env)
 	if (!ori_env)
 		ori_env = env;
 	return (ori_env);
+}
+
+t_line		*get_orig_line(t_line *line)
+{
+	while (line && line->is_orig == 0)
+		line = line->prev;
+	return (line->next);
 }

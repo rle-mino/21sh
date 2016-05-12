@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:40:16 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/12 14:28:44 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/12 20:34:15 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,10 +199,12 @@ void					move_vertically(int dir, t_le *le);
 void					move_to_extrem(int dir, t_le *le);
 void					move_cursor(t_le *le, int dir, t_line **line);
 /*
-***		edit line : pairs
+***		edit line : pairs, pipe, heredoc
 */
 char					*missing_pair(t_line *line);
 void					edit_line_pairing(t_le *le, char *prompt);
+t_line					*get_orig_line(t_line *line);
+char					*edit_line_heredoc(t_le *le, char *end);
 void					parse_buffer_pairing(char *buffer, t_le *le);
 /*
 ***		history
