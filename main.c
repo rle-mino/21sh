@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:37:31 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/04 17:00:08 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/12 18:29:22 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int		main(int ac, char **av, char **env)
 
 	if (ac && av)
 		;
-	signal(SIGINT, safe_exit);
 	if (tcgetattr(0, &reset) == -1)
 		message_handling();
 	g_name_prog = NULL;

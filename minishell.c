@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 03:18:11 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/09 19:38:06 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/12 18:30:31 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,25 +85,26 @@ int			loop_prompt2(t_env *data_env, char *line)
 	return (1);
 }
 
-/*void disp_cmd(t_cmd *comd)  to delete, just testing
-{
-	int		i;
-	t_cmd	*tmp;
-
-	tmp = comd;
-	i = 0;
-	while (tmp)
-	{
-		while (tmp->cmd[i])
-		{
-			dprintf(2, "[%s]\n", tmp->cmd[i]);
-			i++;
-		}
-		dprintf(2, "\n");
-		i = 0;
-		tmp = tmp->next;
-	}
-}
+/*
+***	void disp_cmd(t_cmd *comd)  to delete, just testing
+***	{
+***		int		i;
+***		t_cmd	*tmp;
+***
+***		tmp = comd;
+***		i = 0;
+***		while (tmp)
+***		{
+***			while (tmp->cmd[i])
+***			{
+***				dprintf(2, "[%s]\n", tmp->cmd[i]);
+***				i++;
+***			}
+***			dprintf(2, "\n");
+***			i = 0;
+***			tmp = tmp->next;
+***		}
+***	}
 */
 
 static void	before_loop_prompt2(t_env *e, int cmd, char **line, char **new_line)
@@ -136,7 +137,9 @@ int			loop_prompt(t_env *e)
 		if (e->backup == 1)
 			reverse_datacpy(&e);
 		display_prompt(e);
+		signal(SIGINT, restart_prompt);
 		add_to_hist = edit_line(&(e->le));
+		signal(SIGINT, safe_exit);
 		history(FIRST_HIST, NULL);
 		history(ADD_HIST, add_to_hist);
 		line = to_string(add_to_hist);

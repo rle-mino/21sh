@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:40:16 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/11 20:12:23 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/12 14:28:44 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,35 +162,44 @@ int						check_end_window(int winsize);
 ***		LINE EDIT
 ***
 */
+/*
+***		line edit : display
+*/
+void					add_to_line_display(t_le *le, t_line **line);
+void					delete_char_display(t_line **line, t_le *le);
+void					redisplay_line(t_line *line, t_le *le);
+int						redisplay_line_index(t_line *line, t_le *le);
+/*
+***		line edit : back
+*/
+void					restart_prompt(int sig);
 void					show_me_cursor(t_le *le);
 t_line					*edit_line(t_le *le);
 int						ft_is_arrow(char *buffer);
 int						ft_is_del_or_back(char *buffer);
 void					get_pos_cursor(int *x, int *y);
-void					add_to_line_display(t_le *le, t_line **line);
-void					delete_char_display(t_line **line, t_le *le);
-int						redisplay_line_index(t_line *line, t_le *le);
-void					redisplay_line(t_line *line, t_le *le);
 int						linelen(t_line *line);
+char					*to_string(t_line *line);
+int						ft_putint(int c);
+void					add_to_line(t_le *le, t_line **line, char n);
+t_line					*get_last_line(t_line *line);
+t_line					*get_first_line(t_line *line);
+void					clipboard_to_line(t_le *le);
+void					parse_buffer(char *buffer, t_le *le);
+void					delete_char(t_le *le, t_line **line, char c);
+/*
+***		line edit : move
+*/
 void					move_to_first(t_le *le, t_line **line);
 void					move_to_last(t_le *le, t_line **line);
-void					margin(t_le *le);
 void					move_left(t_le *le, t_line **line);
 void					move_right(t_le *le, t_line **line);
 void					move_to_word(int dir, t_le *le);
 void					move_vertically(int dir, t_le *le);
 void					move_to_extrem(int dir, t_le *le);
-char					*to_string(t_line *line);
-int						ft_putint(int c);
 void					move_cursor(t_le *le, int dir, t_line **line);
-t_line					*get_last_line(t_line *line);
-t_line					*get_first_line(t_line *line);
-void					add_to_line(t_le *le, t_line **line, char n);
-void					delete_char(t_le *le, t_line **line, char c);
-void					parse_buffer(char *buffer, t_le *le);
-void					clipboard_to_line(t_le *le);
 /*
-***		pairs
+***		edit line : pairs
 */
 char					*missing_pair(t_line *line);
 void					edit_line_pairing(t_le *le, char *prompt);
