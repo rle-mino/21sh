@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 02:45:11 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/13 14:24:14 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/13 22:41:57 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,22 +60,17 @@ void			delete_char(t_le *le, t_line **line, char c)
 {
 	t_line		*tmp;
 
-	tmp = *line;
-	if (!*line || !(*line)->prev || (*line)->is_orig)
+	if (!*line || (*line && (*line)->is_orig && c == 127))
 		return ;
-	if (tmp->prev)
-		tmp->prev->next = tmp->next;
-	if (tmp->next)
-		tmp->next->prev = tmp->prev;
-	if (tmp && tmp->next == NULL && c != 127)
+	if (c == 127 || (*line)->next == NULL)
 		move_cursor(le, LEFT, line, NORMAL);
+	tmp = (*line)->next;
+	if ((*line)->next)
+		(*line)->next = (*line)->next->next;
+	if ((*line)->next)
+		(*line)->next->prev = (*line);
 	if (tmp)
 		free(tmp);
-	tmp = NULL;
-	if (c == 127)
-		move_cursor(le, LEFT, line, NORMAL);
-	else if (*line && (*line)->next)
-		*line = (*line)->next;
 	delete_char_display(&((*line)->next), le);
 }
 

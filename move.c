@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 04:20:03 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/13 14:23:38 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/13 21:46:03 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,20 @@
 
 void			move_left(t_le *le, t_line **line)
 {
-	char	buffer[1024];
-	char	*buffer2;
-
-	buffer2 = buffer;
-	if ((*line)->prev && !(*line)->is_orig)
+	if (*line && (*line)->prev && !(*line)->is_orig)
 	{
 		*line = (*line)->prev;
 		if (le->pos_x == 0)
 		{
-			tputs(tgetstr("up", &buffer2), 1, ft_putint);
+			tputs(tgetstr("up", NULL), 1, ft_putint);
 			while (le->pos_x++ < le->w_sizex - 1)
-				tputs(tgetstr("nd", &buffer2), 1, ft_putint);
+				tputs(tgetstr("nd", NULL), 1, ft_putint);
 			le->pos_x--;
 		}
 		else
 		{
 			le->pos_x--;
-			tputs(tgetstr("le", &buffer2), 1, ft_putint);
+			tputs(tgetstr("le", NULL), 1, ft_putint);
 		}
 	}
 }

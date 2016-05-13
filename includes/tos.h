@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:40:16 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/13 14:23:07 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/13 20:32:45 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <signal.h>
 # include <sys/ioctl.h>
 # include <fcntl.h>
+# include "dirent.h"
 
 # define DEBUG fpf("%d - %s - %s\n" ,__LINE__, __func__, __FILE__)
 
@@ -224,5 +225,9 @@ void					clear_line(t_line *line);
 int						get_hist_fd(t_env *env);
 t_hist					*get_first_hist(t_hist *hist);
 void					create_new_hist(t_hist **history, t_line *line);
+/*
+***		completion
+*/
+void					available_completion(void);
 
 #endif
