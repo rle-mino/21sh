@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 04:20:03 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/09 19:05:29 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/13 14:23:38 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ void			move_right(t_le *le, t_line **line)
 	}
 }
 
-void			move_cursor(t_le *le, int dir, t_line **line)
+void			move_cursor(t_le *le, int dir, t_line **line, int mode)
 {
 	void	*o;
 	t_line	*tmp;
 
 	o = NULL;
-	if (dir == 2 || dir == 3)
+	if ((dir == 2 || dir == 3) && mode != PAIRING)
 	{
 		move_to_first(le, line);
 		tputs(tgetstr("cd", NULL), 1, ft_putint);

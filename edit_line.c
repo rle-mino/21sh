@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 02:45:11 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/12 20:32:56 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/13 14:24:14 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ void			delete_char(t_le *le, t_line **line, char c)
 	if (tmp->next)
 		tmp->next->prev = tmp->prev;
 	if (tmp && tmp->next == NULL && c != 127)
-		move_cursor(le, LEFT, line);
+		move_cursor(le, LEFT, line, NORMAL);
 	if (tmp)
 		free(tmp);
 	tmp = NULL;
 	if (c == 127)
-		move_cursor(le, LEFT, line);
+		move_cursor(le, LEFT, line, NORMAL);
 	else if (*line && (*line)->next)
 		*line = (*line)->next;
 	delete_char_display(&((*line)->next), le);
@@ -97,7 +97,7 @@ t_line			*edit_line(t_le *le)
 	{
 		ft_bzero(buffer, sizeof(buffer));
 		read(0, buffer, 5);
-		parse_buffer(buffer, le);
+		parse_buffer(buffer, le, NORMAL);
 		if (buffer[0] == '\n' && buffer[1] == 0)
 		{
 			move_to_last(le, &(le->line));

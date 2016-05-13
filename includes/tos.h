@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:40:16 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/13 10:06:47 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/13 14:23:07 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@ enum
 	SECOND_HIST,
 	ADD_HIST,
 	SAVE_LINE
+};
+
+enum
+{
+	PAIRING,
+	NORMAL
 };
 
 enum
@@ -186,7 +192,7 @@ void					add_to_line(t_le *le, t_line **line, char n);
 t_line					*get_last_line(t_line *line);
 t_line					*get_first_line(t_line *line);
 void					clipboard_to_line(t_le *le);
-void					parse_buffer(char *buffer, t_le *le);
+void					parse_buffer(char *buffer, t_le *le, int mode);
 void					delete_char(t_le *le, t_line **line, char c);
 /*
 ***		line edit : move
@@ -198,7 +204,7 @@ void					move_right(t_le *le, t_line **line);
 void					move_to_word(int dir, t_le *le);
 void					move_vertically(int dir, t_le *le);
 void					move_to_extrem(int dir, t_le *le);
-void					move_cursor(t_le *le, int dir, t_line **line);
+void					move_cursor(t_le *le, int dir, t_line **line, int mode);
 /*
 ***		edit line : pairs, pipe, heredoc
 */
@@ -206,7 +212,6 @@ char					*missing_pair(t_line *line);
 void					edit_line_pairing(t_le *le, char *prompt);
 t_line					*get_orig_line(t_line *line);
 char					*edit_line_heredoc(t_le *le, char *end);
-void					parse_buffer_pairing(char *buffer, t_le *le);
 /*
 ***		history
 */

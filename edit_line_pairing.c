@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 19:04:52 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/12 20:34:17 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/13 14:17:59 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void				edit_line_pairing(t_le *le, char *prompt)
 	{
 		ft_bzero(buffer, sizeof(buffer));
 		read(0, buffer, 5);
-		parse_buffer_pairing(buffer, le);
+		parse_buffer(buffer, le, PAIRING);
 		if (buffer[0] == '\n' && buffer[1] == 0)
 		{
 			move_to_last(le, &(le->line));
@@ -59,7 +59,7 @@ char				*edit_line_heredoc(t_le *le, char *end)
 	{
 		ft_bzero(buffer, sizeof(buffer));
 		read(0, buffer, 5);
-		parse_buffer_pairing(buffer, le);
+		parse_buffer(buffer, le, PAIRING);
 		if (buffer[0] == '\n' && buffer[1] == 0)
 		{
 			move_to_last(le, &(le->line));
