@@ -6,12 +6,24 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/01 13:38:26 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/12 16:54:50 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/13 11:25:38 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "tos.h"
+
+void			update_size(int sig)
+{
+	t_env			*env;
+	struct winsize	w;
+
+	(void)sig;
+	env = get_t_env(NULL);
+	ioctl(0, TIOCGWINSZ, &w);
+	env->le.w_sizex = w.ws_col;
+	env->le.w_sizey = w.ws_row;
+}
 
 void			restart_prompt(int sig)
 {

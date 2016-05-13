@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:40:16 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/12 20:34:15 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/13 10:06:47 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ int						redisplay_line_index(t_line *line, t_le *le);
 /*
 ***		line edit : back
 */
+void					update_size(int sig);
 void					restart_prompt(int sig);
 void					show_me_cursor(t_le *le);
 t_line					*edit_line(t_le *le);
