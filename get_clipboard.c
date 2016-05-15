@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 16:56:05 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/11 21:29:59 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/15 23:04:29 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char		*read_clipboard(void)
 	read(fd, buff, 100);
 	while (buff[++i])
 	{
-		if (buff[i] == '\n' || buff[i] == '\t')
+		if (ft_isspace(buff[i]))
 			buff[i] = ' ';
 	}
 	close(fd);

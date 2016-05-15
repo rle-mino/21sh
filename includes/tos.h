@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:40:16 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/15 22:21:12 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/15 23:26:24 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,6 +234,6 @@ void					create_new_hist(t_hist **history, t_line *line);
 /*
 ***		completion
 */
-void					available_completion(void);
+void					complete_word(t_line **line, t_le *le);
 
 #endif

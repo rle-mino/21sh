@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 17:09:47 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/13 21:30:54 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/15 23:26:31 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,5 @@ void		parse_buffer(char *buffer, t_le *le, int mode)
 	else if (buffer[0] == 4 && buffer[1] == 0)
 		restart_prompt(-1);
 	else if (buffer[0] == '\t' && buffer[1] == 0)
-		return ;
+		complete_word(&(le->line), le);
 }
