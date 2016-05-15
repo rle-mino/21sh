@@ -6,11 +6,24 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 17:20:12 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/07 20:01:16 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/15 04:18:45 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
+
+int			free_any_cmd_helper(char ***str, int i, int a)
+{
+	if (a == i + 1)
+	{
+		free((*str)[a]);
+		(*str)[a] = NULL;
+		if ((*str)[a + 1])
+			recreate_tab(str, i);
+		return (0);
+	}
+	return (1);
+}
 
 void		free_tab(char **str)
 {
@@ -54,4 +67,19 @@ void		free_cmd(t_env *e)
 	}
 	free(tmp);
 	e->comd = NULL;
+}
+
+void		free_arbre(t_arbre *a)
+{
+	if (!(*a))
+		return ;
+	if (a == NULL)
+		return ;
+	(*a)->lettre = 0;
+	if ((*a)->filsg)
+		free_arbre(&(*a)->filsg);
+	if ((*a)->frered)
+		free_arbre(&(*a)->frered);
+	free(*a);
+	(*a) = NULL;
 }

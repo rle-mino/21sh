@@ -6,7 +6,7 @@
 #    By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/25 23:31:13 by rle-mino          #+#    #+#              #
-#    Updated: 2016/05/13 21:29:18 by rle-mino         ###   ########.fr        #
+#    Updated: 2016/05/15 03:42:03 by ishafie          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,10 +56,14 @@ SRC		=					DEBUG_FOR_EDIT_LINE_TO_DELETE.c			\
 							pipe.c									\
 							redirection.c							\
 							redirection2.c							\
+							redirection3.c							\
 							redirection_error.c						\
 							set_env_error.c							\
 							signal_fnt.c							\
 							struct.c								\
+							tabulation_tree.c						\
+							tabulation_tree_display.c				\
+							tabulation_tree_action.c				\
 							term_error.c							\
 							to_is.c									\
 							tools.c									\

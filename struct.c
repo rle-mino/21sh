@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 16:50:35 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/07 21:40:11 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/14 23:54:10 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ t_env			*create_env(char **env)
 	tmp->comd = NULL;
 	tmp->nb_pipe = 0;
 	tmp->ptr_first_cmd = NULL;
+	tmp->tb = NULL;
 	return (tmp);
 }

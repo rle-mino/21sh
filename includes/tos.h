@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:40:16 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/13 20:32:45 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/15 02:34:31 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,13 @@ typedef struct			s_pair
 ***		structs for command execution and env
 */
 
+typedef struct			s_noeud
+{
+	unsigned char		lettre;
+	struct s_noeud		*filsg;
+	struct s_noeud		*frered;
+}						*t_arbre;
+
 typedef struct			s_arg
 {
 	char				*content;
@@ -148,6 +155,7 @@ typedef struct			s_env
 	int					backup;
 	t_data				*data_backup;
 	t_le				le;
+	t_arbre				tb; // a enlever
 	int					total_nb_cmd;
 	int					nb_pipe;
 	int					fd;

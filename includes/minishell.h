@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 04:57:37 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/09 19:12:21 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/15 04:31:30 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "libft.h"
 # include "tos.h"
+# include "arbre.h"
+# include <dirent.h>
 # include <fcntl.h>
 # include <time.h>
 # include <sys/stat.h>
@@ -44,7 +46,19 @@ void					free_tab(char **str);
 */
 int						redirection_cmd(t_env *e, char **line);
 int						redirection_error(char **line, int i);
-int						find_redir_str(char **str, char **redir);
+int						choose_redir(t_env *e, char **l, int i, int *nb);
+int						find_redir_str(char **str, char **redir, char **prefix,
+						char **out);
+
+int						str_redir_ok(char **str);
+int						find_redir(char **line);
+int						choose_alt_redir(t_env *e, char **line, int i);
+int						choose_alt_redir_in(char **line, int i);
+
+char					*join_all(char *first, char *second, char *third);
+void					get_only_redir_helper(char *str, int *end);
+void					redirection_out_helper(char **line, int i,
+						int alt_redir, int nb);
 
 /*
 ***		STRUCT COMMAND
@@ -53,6 +67,9 @@ t_cmd					*create_cmd(char *str);
 void					create_all_cmds(t_env *e, char *str);
 void					add_back_cmd(t_cmd **cmd, char *arg);
 void					free_any_cmd(t_env *e, char **str, int i);
+void					recreate_tab(char ***str, int i);
+
+int						free_any_cmd_helper(char ***str, int i, int a);
 
 void					replace_cmd(t_env **e);
 

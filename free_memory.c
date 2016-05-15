@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 15:10:09 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/04 19:00:53 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/15 03:04:40 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void			free_env_tab(char **env)
 {
 	free_args(env);
-	env = (char**)malloc(sizeof(char*));
+	env = (char**)malloc(sizeof(char*) * 2);
 	if (!env)
 		malloc_handling();
 	env[0] = NULL;

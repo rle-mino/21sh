@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 03:18:11 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/12 18:38:33 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/15 04:37:19 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ int			go_prompt(t_env *data_env, char **args)
 	else if (args && args[0] != NULL && data_env->comd)
 	{
 		if (redirection_cmd(data_env, data_env->comd->cmd) != -1)
+		{
 			error = exec_easy(data_env, data_env->comd);
+		}
 	}
 	if (args)
 		free_args(args);

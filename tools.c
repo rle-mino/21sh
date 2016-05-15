@@ -6,11 +6,27 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/03 02:45:04 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/02 19:39:23 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/15 03:51:11 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void		how_to_tab(t_env *e, char **args)
+{
+	t_arbre a;
+	char	*mot;
+
+	mot = (char*)malloc(sizeof(char) * 100);
+	ft_bzero(mot, 100);
+	creer_arbre(&(e->tb), args[1]);
+	a = e->tb;
+	e->tb = recherche(&(e->tb), args[2]);
+	completion_tree(e->tb, &mot, 0);
+	dprintf(2, "MOT = %s\n", mot);
+	free_arbre(&a);
+	e->tb = NULL;
+}
 
 int			suite_get_all_function(t_env *e, char **args)
 {
@@ -33,6 +49,11 @@ int			suite_get_all_function(t_env *e, char **args)
 	{
 		// remettre struct env
 		tputs(tgetstr("cl", NULL), 1, ft_putint);
+		return (1);
+	}
+	if (ft_strcmp(args[0], "tab") == 0) // a enlever
+	{
+		how_to_tab(e, args);
 		return (1);
 	}
 	return (0);

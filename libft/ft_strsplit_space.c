@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 20:51:07 by ishafie           #+#    #+#             */
-/*   Updated: 2016/04/03 04:35:42 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/15 03:03:20 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int		nb_word(char const *s)
 
 	k = 0;
 	i = 0;
-	while (ft_isspace(s[i]))
+	while (s[i] && ft_isspace(s[i]))
 		i++;
 	while (s[i])
 	{
@@ -41,7 +41,7 @@ static int		nb_word(char const *s)
 			i = get_next_quote(s, i + 1);
 		if (!ft_isspace(s[i]))
 			k++;
-		while (!ft_isspace(s[i]) && s[i])
+		while (s[i] && !ft_isspace(s[i]))
 			i++;
 		if (ft_isspace(s[i]))
 			i++;
@@ -115,7 +115,7 @@ char			**ft_strsplit_space(char const *s)
 		return (NULL);
 	j = 0;
 	i = nb_word(s);
-	tab = (char **)ft_memalloc(sizeof(char *) * i + 1);
+	tab = (char **)ft_memalloc(sizeof(char *) * (i + 1));
 	if (tab == NULL)
 		return (NULL);
 	while (i)

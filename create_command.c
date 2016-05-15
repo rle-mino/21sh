@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 13:32:36 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/09 19:22:34 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/15 17:10:17 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void			add_back_cmd(t_cmd **cmd, char *arg)
 	t_cmd		*newcmd;
 	t_cmd		*tmp;
 
+	if (!arg)
+		return ;
 	tmp = *cmd;
 	if (!tmp)
 	{
@@ -58,8 +60,8 @@ void			create_all_cmds(t_env *e, char *str)
 	{
 		if (!(arg = (char**)malloc(sizeof(char*) * 2)))
 			malloc_handling();
-			arg[0] = str;
-			arg[1] = NULL;
+		arg[0] = ft_strdup(str);
+		arg[1] = NULL;
 	}
 	add_to_cmd(arg, &comd);
 	e->comd = comd;
@@ -101,15 +103,11 @@ void			free_any_cmd(t_env *e, char **str, int i)
 		{
 			free(str[a]);
 			str[a] = NULL;
+			if (!str[a + 1])
+				return ;
 		}
-		if (a == i + 1)
-		{
-			free(str[a]);
-			str[a] = NULL;
-			if (str[a + 1])
-				recreate_tab(&str, i);
+		if (free_any_cmd_helper(&str, i, a) == 0)
 			return ;
-		}
 		a++;
 	}
 	recreate_tab(&str, i);
