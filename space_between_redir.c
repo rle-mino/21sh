@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 18:59:26 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/15 20:03:44 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/15 20:05:00 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ t_line		*add_space_between_redir(t_line *line)
 			insert_space_in_line(&line);
 		else if (line && line->c == '>')
 		{
-			DEBUG;
 			line = line->next;
 			while (line && (line->c == '&' || line->c == '-' || line->c == '>'))
 				line = line->next;
