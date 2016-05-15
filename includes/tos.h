@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:40:16 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/15 19:36:23 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/15 22:21:12 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,7 +215,7 @@ void					move_cursor(t_le *le, int dir, t_line **line, int mode);
 /*
 ***		edit line : pairs, pipe, heredoc
 */
-char					*missing_pair(t_line *line);
+char					*missing_pair(t_line *line, int indquote);
 void					edit_line_pairing(t_le *le, char *prompt);
 t_line					*get_orig_line(t_line *line);
 char					*edit_line_heredoc(t_le *le, char *end);

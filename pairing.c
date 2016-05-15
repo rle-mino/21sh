@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/08 16:42:45 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/13 14:11:07 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/15 22:37:34 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int		search_pair(t_line *line, char f)
 	return (0);
 }
 
-char			*missing_pair(t_line *line)
+char			*missing_pair(t_line *line, int indquote)
 {
 	static char		prompts[6][10] = {"quote> ", "dquote> ", "subsh> ",\
 										"cursh> ", "bquote> ", "pipe> "};
@@ -79,15 +79,16 @@ char			*missing_pair(t_line *line)
 	while (line)
 	{
 		paired = 0;
-		if ((find = ft_strchr(missing, line->c)) &&
-		!(paired = search_pair(line->next, reverse_pair(line->c))) &&
-		line->paired == 0 && line->c)
-			return (prompts[pair_index(find) - missing]);
+		indquote = line && line->c == '\"' && indquote ? 0 : 1;
+		if ((find = ft_strchr(missing, line->c)) && line->paired == 0 &&
+		!(paired = search_pair(line->next, reverse_pair(line->c))) && line->c)
+		{
+			if (!(indquote && *find != '\"'))
+				return (prompts[pair_index(find) - missing]);
+		}
 		else if (find && paired)
 			line->paired = 1;
 		line = line->next;
 	}
-	if (pipe_is_alone(first))
-		return (prompts[5]);
-	return (NULL);
+	return (pipe_is_alone(first) ? prompts[5] : NULL);
 }

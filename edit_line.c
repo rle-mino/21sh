@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 02:45:11 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/15 19:54:07 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/15 22:45:02 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ void			delete_char(t_le *le, t_line **line, char c)
 {
 	t_line		*tmp;
 
-	if (!*line || (*line && (*line)->is_orig && c == 127))
+	if (!*line || (*line && (*line)->is_orig && c == 127) ||
+		(c == 127 && !(*line)->prev))
 		return ;
 	if (c == 127 || (*line)->next == NULL)
 		move_cursor(le, LEFT, line, NORMAL);
@@ -120,7 +121,7 @@ t_line			*edit_line(t_le *le)
 			break ;
 		}
 	}
-	if ((le->prompt = missing_pair(get_first_line(le->line))))
+	if ((le->prompt = missing_pair(get_first_line(le->line), 0)))
 		edit_line_pairing(le, le->prompt);
 	return (get_first_line(le->line));
 }
