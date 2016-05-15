@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:40:16 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/15 02:34:31 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/15 19:36:23 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@ enum
 
 enum
 {
+	ADD_SPACE,
+	RUP_FOR_HIST
+};
+
+enum
+{
 	GET_HOME = 1,
 	GET_TERM
 };
@@ -90,15 +96,6 @@ typedef struct			s_hist
 	struct s_hist		*next;
 	struct s_hist		*prev;
 }						t_hist;
-
-typedef struct			s_pair
-{
-	int					quote;
-	int					dquote;
-	int					subsh;
-	int					cursh;
-	int					bquote;
-}						t_pair;
 
 /*
 ***		structs for command execution and env
@@ -187,6 +184,7 @@ int						redisplay_line_index(t_line *line, t_le *le);
 /*
 ***		line edit : back
 */
+t_line					*add_space_between_redir(t_line *line);
 void					update_size(int sig);
 void					restart_prompt(int sig);
 void					show_me_cursor(t_le *le);
@@ -195,7 +193,7 @@ int						ft_is_arrow(char *buffer);
 int						ft_is_del_or_back(char *buffer);
 void					get_pos_cursor(int *x, int *y);
 int						linelen(t_line *line);
-char					*to_string(t_line *line);
+char					*to_string(t_line *line, int space);
 int						ft_putint(int c);
 void					add_to_line(t_le *le, t_line **line, char n);
 t_line					*get_last_line(t_line *line);

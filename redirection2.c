@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 16:21:58 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/15 18:25:57 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/15 18:54:09 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,8 @@ void		get_redir_out(char *str, int *i, int *end, char **out, int save)
 	prefix = NULL;
 //	save = *end; // false, last problem
 	*i = *end;
-	dprintf(2, "=> %d\n", *end);
 	if (get_only_redir(str, i, end) == 0 || !str[*i])
 	{
-		dprintf(2, "nb %d et %d et %d\n", *i, save, *end);
 		if (!*out)
 			*out = ft_strsub(str, save, *i);
 		return ;
@@ -147,7 +145,6 @@ int			find_redir_str(char **str, char **redir, char **prefix, char **out)
 	char	*str_lol;
 
 	i = 0;
-	dprintf(2, "beginstr = %s\n", *str);
 	other_out = NULL;
 	if (!*str || get_only_redir(*str, &i, &end) == 0)
 		return (0);
@@ -166,6 +163,5 @@ int			find_redir_str(char **str, char **redir, char **prefix, char **out)
 	*redir = NULL;
 	*prefix = NULL;
 	*out = NULL;
-	dprintf(2, "create = %s\n", *str);
 	return (1);
 }

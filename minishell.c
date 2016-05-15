@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 03:18:11 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/15 04:37:19 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/15 19:39:29 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,8 @@ int			loop_prompt(t_env *e)
 		signal(SIGINT, safe_exit);
 		history(FIRST_HIST, NULL);
 		history(ADD_HIST, add_to_hist);
-		line = to_string(add_to_hist);
+		line = to_string(add_to_hist, ADD_SPACE);
+		fpf("line = %s\n", line);
 		e->total_nb_cmd = get_nb_cmd(line);
 		before_loop_prompt2(e, 0, &line, &new_line);
 	}

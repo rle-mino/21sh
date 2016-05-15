@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/01 12:06:40 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/10 19:15:41 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/15 19:38:23 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ static void				write_history(t_hist *hist, t_env *env)
 	hist = hist->prev;
 	while (hist)
 	{
-		tmp = to_string(get_first_line(hist->old_line));
+		tmp = to_string(get_first_line(hist->old_line), RUP_FOR_HIST);
 		tmp2 = tmp;
 		tmp = ft_strjoin(tmp, "\n");
 		free(tmp2);

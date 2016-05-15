@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 02:45:11 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/13 22:41:57 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/15 19:54:07 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,42 @@
 ***		Gestion complete de l'edition de line
 */
 
-char			*to_string(t_line *line)
+t_line			*cpy_line_or_not(t_line *line, int space)
+{
+	t_line		*cpy;
+
+	if (space == ADD_SPACE)
+	{
+		cpy = cpy_line(line);
+		cpy = add_space_between_redir(cpy);
+	}
+	else
+		cpy = line;
+	return (cpy);
+}
+
+char			*to_string(t_line *line, int space)
 {
 	char	buffer[2];
 	char	*string;
 	char	*tmp;
+	t_line	*cpy;
+	t_line	*first;
 
 	string = ft_memalloc(1);
-	while (line)
+	cpy = cpy_line_or_not(line, space);
+	first = cpy;
+	while (cpy)
 	{
 		ft_bzero(buffer, sizeof(buffer));
-		buffer[0] = line->c;
+		buffer[0] = cpy->c;
 		tmp = string;
 		string = ft_strjoin(string, buffer);
 		free(tmp);
-		line = line->next;
+		cpy = cpy->next;
 	}
+	if (space == ADD_SPACE)
+		clear_line(first);
 	return (string);
 }
 

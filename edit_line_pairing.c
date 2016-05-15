@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 19:04:52 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/13 14:17:59 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/15 19:38:03 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ char				*edit_line_heredoc(t_le *le, char *end)
 			break ;
 		}
 	}
-	if (ft_strcmp(to_string(get_orig_line(le->line)), end))
+	if (ft_strcmp(to_string(get_orig_line(le->line), RUP_FOR_HIST), end))
 		edit_line_heredoc(le, end);
 	if ((le->prompt = missing_pair(get_first_line(le->line))))
 		edit_line_pairing(le, le->prompt);
-	return (to_string(get_first_line(le->line)));
+	return (to_string(get_first_line(le->line), RUP_FOR_HIST));
 }
