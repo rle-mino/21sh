@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 03:18:11 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/15 19:39:29 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/15 22:23:55 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,28 +87,6 @@ int			loop_prompt2(t_env *data_env, char *line)
 	return (1);
 }
 
-/*
-***	void disp_cmd(t_cmd *comd)  to delete, just testing
-***	{
-***		int		i;
-***		t_cmd	*tmp;
-***
-***		tmp = comd;
-***		i = 0;
-***		while (tmp)
-***		{
-***			while (tmp->cmd[i])
-***			{
-***				dprintf(2, "[%s]\n", tmp->cmd[i]);
-***				i++;
-***			}
-***			dprintf(2, "\n");
-***			i = 0;
-***			tmp = tmp->next;
-***		}
-***	}
-*/
-
 static void	before_loop_prompt2(t_env *e, int cmd, char **line, char **new_line)
 {
 	while (*line && cmd < e->total_nb_cmd)
@@ -145,7 +123,6 @@ int			loop_prompt(t_env *e)
 		history(FIRST_HIST, NULL);
 		history(ADD_HIST, add_to_hist);
 		line = to_string(add_to_hist, ADD_SPACE);
-		fpf("line = %s\n", line);
 		e->total_nb_cmd = get_nb_cmd(line);
 		before_loop_prompt2(e, 0, &line, &new_line);
 	}

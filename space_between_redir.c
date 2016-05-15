@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 18:59:26 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/15 20:05:00 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/15 20:14:36 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void		insert_space_in_line(t_line **line)
 {
 	t_line	*new;
 
+	if (!*line)
+		return ;
 	new = ft_memalloc(sizeof(t_line));
 	new->c = ' ';
 	new->next = (*line)->next;

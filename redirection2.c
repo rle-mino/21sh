@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 16:21:58 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/15 18:54:09 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/14 16:32:17 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,19 @@ int			get_only_redir(char *str, int *i, int *end)
 		}
 	}
 	else if ((str)[*end] == '&')
-		get_only_redir_helper(str, end);
+	{
+		*end = *end + 1;
+		if ((str)[*end] == '-')
+			*end = *end + 1;
+	}
 	while (*i > 0 && !ft_isspace((str)[*i]))
 		*i = *i - 1;
 	return (1);
 }
-
-void		get_redir_out(char *str, int *i, int *end, char **out, int save)
+char		*join_all(char *first, char *second, char *third);
+void		get_redir_out(char *str, int *i, int *end, char **out)
 {
-//	int		save;
+	int		save;
 	char	*redir;
 	char	*prefix;
 	char	*tmp;
@@ -49,7 +53,7 @@ void		get_redir_out(char *str, int *i, int *end, char **out, int save)
 	len = 0;
 	tmp = NULL;
 	prefix = NULL;
-//	save = *end; // false, last problem
+	save = *end;
 	*i = *end;
 	if (get_only_redir(str, i, end) == 0 || !str[*i])
 	{
@@ -64,27 +68,18 @@ void		get_redir_out(char *str, int *i, int *end, char **out, int save)
 		else
 			prefix = ft_strsub(str, save, *i - save);
 		redir = ft_strsub(str, *i, *end - *i);
+		if (*out)
+			ft_strdel(out);
 		len = *end;
 		while ((str)[len] && !ft_isspace((str)[len]))
 			len++;
-		if ((len - *end) != 0)
-		{
-			if (*out)
-				ft_strdel(out);
-			*out = ft_strsub(str, *end, len - *end);
-			tmp = *out;
-			*out = join_all(prefix, redir, *out);
-			*i = *end;
-			free(tmp);
-			free(redir);
-			free(prefix);
-			get_redir_out(str, end, i, out, save);
-		}
-		else
-		{
-			*end = len;
-			get_redir_out(str, i, end, out, save);
-		}
+		*out = ft_strsub(str, *end, len - *end);
+		tmp = *out;
+		*out = join_all(prefix, redir, *out);
+		free(tmp);
+		free(redir);
+		*i = *end;
+		get_redir_out(str, end, i, out);
 	}
 }
 
@@ -150,7 +145,7 @@ int			find_redir_str(char **str, char **redir, char **prefix, char **out)
 		return (0);
 	*prefix = ft_strsub(*str, 0, i);
 	*redir = ft_strsub(*str, i, end - i);
-	get_redir_out(*str, &i, &end, out, end);
+	get_redir_out(*str, &i, &end, out);
 	str_lol = *str;
 	*str = join_all(*prefix, *redir, *out);
 	ft_strdel(&str_lol);

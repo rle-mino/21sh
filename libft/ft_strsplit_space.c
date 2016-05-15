@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 20:51:07 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/15 03:03:20 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/15 22:08:44 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int		nb_word(char const *s)
 
 	k = 0;
 	i = 0;
-	while (s[i] && ft_isspace(s[i]))
+	while (ft_isspace(s[i]))
 		i++;
 	while (s[i])
 	{
@@ -41,7 +41,7 @@ static int		nb_word(char const *s)
 			i = get_next_quote(s, i + 1);
 		if (!ft_isspace(s[i]))
 			k++;
-		while (s[i] && !ft_isspace(s[i]))
+		while (!ft_isspace(s[i]) && s[i])
 			i++;
 		if (ft_isspace(s[i]))
 			i++;

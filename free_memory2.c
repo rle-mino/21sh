@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 17:20:12 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/15 04:18:45 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/15 22:32:03 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int			free_any_cmd_helper(char ***str, int i, int a)
 		free((*str)[a]);
 		(*str)[a] = NULL;
 		if ((*str)[a + 1])
-			recreate_tab(str, i);
+			recreate_tab(str, i, 0);
 		return (0);
 	}
 	return (1);

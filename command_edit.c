@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/08 17:40:02 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/13 23:28:39 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/15 20:15:55 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void			add_to_cmd(char **arg, t_cmd **comd)
 	i = 0;
 	while (arg && arg[i])
 	{
-		find_redir_str(&(arg[i]), &redir, &prefix, &out);
+//		find_redir_str(&(arg[i]), &redir, &prefix, &out);
 		add_back_cmd(comd, arg[i]);
 		i++;
 	}

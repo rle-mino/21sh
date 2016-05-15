@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 13:32:36 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/15 17:10:17 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/15 22:31:06 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void			create_all_cmds(t_env *e, char *str)
 	replace_cmd(&e);
 }
 
-void			recreate_tab(char ***str, int i)
+void			recreate_tab(char ***str, int i, int closing)
 {
 	int			a;
 
@@ -78,7 +78,10 @@ void			recreate_tab(char ***str, int i)
 		return ;
 	while ((*str)[a])
 		a++;
-	i = a + 2;
+	if (closing)
+		i = a + 1;
+	else
+		i = a + 2;
 	while ((*str)[i])
 	{
 		(*str)[a] = (*str)[i];
@@ -91,8 +94,10 @@ void			recreate_tab(char ***str, int i)
 void			free_any_cmd(t_env *e, char **str, int i)
 {
 	int			a;
+	int			closing;
 
 	a = 0;
+	closing = 0;
 	if (!e->comd || !e->comd->cmd)
 		return ;
 	if (i == 0)
@@ -101,14 +106,16 @@ void			free_any_cmd(t_env *e, char **str, int i)
 	{
 		if (a == i)
 		{
+			if (ft_strcmp(str[a], ">&-") == 0 || ft_strcmp(str[a] + 1, ">&-") == 0)
+				closing = 1;
 			free(str[a]);
 			str[a] = NULL;
 			if (!str[a + 1])
 				return ;
 		}
-		if (free_any_cmd_helper(&str, i, a) == 0)
+		if (closing == 0 && free_any_cmd_helper(&str, i, a) == 0)
 			return ;
 		a++;
 	}
-	recreate_tab(&str, i);
+	recreate_tab(&str, i, closing);
 }
