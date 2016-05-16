@@ -6,7 +6,7 @@
 #    By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/25 23:31:13 by rle-mino          #+#    #+#              #
-#    Updated: 2016/05/15 23:05:41 by rle-mino         ###   ########.fr        #
+#    Updated: 2016/05/17 00:50:27 by rle-mino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC		=					DEBUG_FOR_EDIT_LINE_TO_DELETE.c			\
 							get_clipboard.c							\
 							get_env_var.c							\
 							auto_complete.c							\
+							path_in_tree.c							\
 							space_between_redir.c					\
 							get_next_line.c							\
 							history.c								\

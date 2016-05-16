@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 20:57:04 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/16 23:30:04 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/17 01:15:41 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,12 @@ int				redirection_in(t_env *e, char **line, int i)
 	}
 	else if (alt_redir == 3)
 	{
-		char buf[10];
+		/*char buf[10];
 		ft_bzero(buf, sizeof(buf));
 		fflush(STDIN_FILENO);
 		getchar();
 		read(0, buf, 9);
-		redir_heredoc(e, line, i);
+		redir_heredoc(e, line, i);*/
 	}
 	else
 	{

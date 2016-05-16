@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 16:56:05 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/15 23:04:29 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/17 00:35:34 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char		*read_clipboard(void)
 	int		fd;
 
 	i = -1;
-	if ((fd = open("/tmp/clipboard", O_RDONLY)) == -1)
+	if ((fd = open("/tmp/.clipboard", O_RDONLY)) == -1)
 		return (NULL);
 	ft_bzero(buff, sizeof(buff));
 	read(fd, buff, 100);
@@ -41,7 +41,7 @@ static int		get_clipboard(void)
 
 	av = ft_memalloc(sizeof(char *) * 2);
 	av[0] = ft_strdup("pbpaste");
-	if ((fd = open("/tmp/clipboard", O_WRONLY | O_CREAT | O_TRUNC, 0644)) == -1)
+	if ((fd = open("/tmp/.clipboard", O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0)
 		return (-1);
 	father = fork();
 	if (father == 0)

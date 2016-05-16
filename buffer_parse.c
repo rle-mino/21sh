@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 17:09:47 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/15 23:26:31 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/17 01:17:39 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ***		Parsing du buffer pour l'edition de ligne standard
 */
 
-void		parse_buffer(char *buffer, t_le *le, int mode)
+void			parse_buffer(char *buffer, t_le *le, int mode)
 {
 	if (ft_isprint(buffer[0]))
 		add_to_line(le, &(le->line), buffer[0]);
