@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actualise_env.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/28 04:07:36 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/15 03:16:48 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/16 14:37:31 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,18 @@ void		actualise_anything(t_env *e, char *choice, char *final)
 	t_data		*tmp;
 	t_data		*aux;
 	char		*str;
+	int			len;
 
+	len = 0;
 	tmp = get_anything(e, choice);
 	if (choice && ft_strcmp(choice, "PWD") == 0 && tmp)
 	{
 		aux = get_anything(e, "OLDPWD");
-		str = (char*)malloc(sizeof(char) *
-		(ft_strlen(tmp->content) + ft_strlen(final) + 2));
+		len = ft_strlen(tmp->content) + ft_strlen(final) + 1;
+		str = (char*)malloc(sizeof(char) * len);
 		if (!str)
 			malloc_handling();
-		getcwd(str, 1024);
+		getcwd(str, len);
 		if (aux)
 		{
 			free(aux->content);
