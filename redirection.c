@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 20:57:04 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/15 22:47:08 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/16 23:30:04 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,23 @@ int				redirection_in(t_env *e, char **line, int i)
 		else
 			dup2(STDIN_FILENO, ft_atoi(ft_strsub(line[i - 1], 0, nb)));
 	}
-	in = open(line[i], O_RDONLY);
-	if (in == -1 && alt_redir == 0)
-		return (-1);
-	dup2(in, STDIN_FILENO);
-	close(in);
+	else if (alt_redir == 3)
+	{
+		char buf[10];
+		ft_bzero(buf, sizeof(buf));
+		fflush(STDIN_FILENO);
+		getchar();
+		read(0, buf, 9);
+		redir_heredoc(e, line, i);
+	}
+	else
+	{
+		in = open(line[i], O_RDONLY);
+		if (in == -1 && alt_redir == 0)
+			return (-1);
+		dup2(in, STDIN_FILENO);
+		close(in);
+	}
 	free_any_cmd(e, line, i - 1);
 	return (0);
 }
@@ -113,6 +125,9 @@ int				redirection_cmd(t_env *e, char **line)
 	int			error;
 
 	error = 0;
+/*	int a = 0;
+	while (line[a])
+	dprintf(2, "line = %s\n", line[a++]);*/
 	if (!line || !*line || (redir = find_redir(line)) == 0)
 		return (0);
 	if ((i = get_next_redir(line)) == -1)

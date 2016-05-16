@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 15:18:59 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/07 20:29:08 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/16 15:43:15 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char				*check_line(char *line, t_env *e)
 	i = 0;
 	if (!e || !(e->path))
 		return (access_without_path(line));
-	if (line[0] == '.' && line[1] == '/')
+	if (line && *line && line[0] == '.' && line[1] == '/')
 		return (exec_line(line));
 	while (e->path[i])
 	{

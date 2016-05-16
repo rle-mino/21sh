@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:37:31 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/13 11:25:25 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/16 23:18:12 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		main(int ac, char **av, char **env)
 	g_name_prog = NULL;
 	signal(SIGWINCH, update_size);
 	data_env = create_env(env);
+	data_env->reset = reset;
 	fill_env(&data_env, env);
 	if (init_term(data_env) == 0)
 		message_handling();

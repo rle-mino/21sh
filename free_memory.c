@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 15:10:09 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/15 03:04:40 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/16 18:03:54 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void			free_env_tab(char **env)
 {
 	free_args(env);
-	env = (char**)malloc(sizeof(char*) * 2);
+/*	env = (char**)malloc(sizeof(char*) * 2);
 	if (!env)
-		malloc_handling();
+	malloc_handling();*/
 	env[0] = NULL;
 	env[1] = NULL;
 }
@@ -30,9 +30,12 @@ void			free_args(char **args)
 	while (args[i] != NULL)
 	{
 		free(args[i]);
+		args[i] = NULL;
 		i++;
 	}
-	free(args);
+//	fpf("1 : %p\n", args);
+//	free(args);
+//	args = NULL;
 }
 
 static void		free_data_one(t_data **lst)

@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 04:57:37 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/15 22:30:46 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/16 19:52:49 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int						str_redir_ok(char **str);
 int						find_redir(char **line);
 int						choose_alt_redir(t_env *e, char **line, int i);
 int						choose_alt_redir_in(char **line, int i);
+void					redir_heredoc(t_env *e, char **line, int i);
 
 char					*join_all(char *first, char *second, char *third);
 void					get_only_redir_helper(char *str, int *end);

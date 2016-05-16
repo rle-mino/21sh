@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:40:16 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/15 23:26:24 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/16 23:17:51 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ typedef struct			s_env
 	int					total_nb_cmd;
 	int					nb_pipe;
 	int					fd;
+	struct termios		reset;
 }						t_env;
 
 int						env_sw(void);
