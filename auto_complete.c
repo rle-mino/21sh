@@ -6,19 +6,30 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 22:55:43 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/16 00:13:29 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/16 15:25:08 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tos.h"
 #include "minishell.h"
 
-int				is_folder(char *name)
+int				is_folder(char *path, char *name, char *buffer)
 {
 	struct stat		statb;
+	int				folder;
+	char			*all;
+	char			*tmp;
 
-	if (!stat(name, &statb) && S_ISDIR(statb.st_mode))
+	all = ft_strjoin(path, name);
+	tmp = ft_strjoin(all, buffer);
+	free(all);
+	folder = stat(tmp, &statb);
+	if (!folder && S_ISDIR(statb.st_mode) && tmp[ft_strlen(tmp) - 1] != '/')
+	{
+		free(tmp);
 		return (1);
+	}
+	free(tmp);
 	return (0);
 }
 
@@ -29,17 +40,17 @@ char			**get_path_and_word(char *str)
 
 	i = ft_strlen(str) - 1;
 	path_and_word = ft_memalloc(sizeof(char *) * 2);
-	while (i > 0)
+	while (i >= 0)
 	{
 		if (str[i] == '/')
 		{
-			path_and_word[0] = ft_strsub(str, 0, i);
+			path_and_word[0] = ft_strsub(str, 0, i + 1);
 			path_and_word[1] = ft_strdup(str + i + 1);
 			return (path_and_word);
 		}
 		i--;
 	}
-	path_and_word[0] = ft_strdup(".");
+	path_and_word[0] = ft_strdup("./");
 	path_and_word[1] = ft_strdup(str);
 	return (path_and_word);
 }
@@ -83,11 +94,10 @@ void			complete_word(t_line **line, t_le *le)
 	tmp = arbre;
 	arbre = recherche(&arbre, path_and_word[1]);
 	completion_tree(arbre, &buffer, 0);
-	if (!buffer[0] && is_folder(path_and_word[1]))
+	while (buffer[++i])
+		add_to_line(le, line, buffer[i]);
+	if (is_folder(path_and_word[0], path_and_word[1], buffer))
 		add_to_line(le, line, '/');
-	else
-		while (buffer[++i])
-			add_to_line(le, line, buffer[i]);
 	free_arbre(&tmp);
 	free(buffer);
 	free(path_and_word[0]);

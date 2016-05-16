@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/28 04:07:36 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/16 14:37:31 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/16 15:25:12 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void		actualise_anything(t_env *e, char *choice, char *final)
 	if (choice && ft_strcmp(choice, "PWD") == 0 && tmp)
 	{
 		aux = get_anything(e, "OLDPWD");
-		len = ft_strlen(tmp->content) + ft_strlen(final) + 1;
+		len = ft_strlen(tmp->content) + ft_strlen(final) + 1024;
 		str = (char*)malloc(sizeof(char) * len);
 		if (!str)
 			malloc_handling();
