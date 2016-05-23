@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 22:55:43 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/16 15:25:08 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/23 14:23:23 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ void			complete_word(t_line **line, t_le *le)
 {
 	char		**path_and_word;
 	char		*buffer;
-	t_arbre		arbre;
-	t_arbre		tmp;
+	t_arbre		*arbre;
+	t_arbre		*tmp;
 	int			i;
 
 	i = -1;

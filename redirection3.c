@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ishafie  <ishafie @student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 15:55:59 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/17 01:16:45 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/23 14:35:27 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,31 +70,21 @@ void		redirection_out_helper(char **line, int i, int alt_redir, int nb)
 	}
 }
 
-/*
-***	void		redir_heredoc(t_env *e, char **line, int i)
-***	{
-***		char	*heredoc;
-***		pid_t	father;
-***		int		fd[2];
-***
-***		e->le.line = NULL;
-***		reset_term(e->reset);
-***		heredoc = edit_line_heredoc(&(e->le), line[i]);
-***		pipe(fd);
-***		father = fork();
-***		if (father == 0)
-***		{
-***			close(fd[0]);
-***			ft_putstr_fd(heredoc, fd[1]);
-***			exit(0);
-***		}
-***		else
-***		{
-***			close(fd[1]);
-***			dup2(fd[0], STDIN_FILENO);
-***		}
-***		init_term(e);
-***		close(fd[0]);
-***		close(fd[1]);
-***	}
-*/
+void		redir_heredoc(void)
+{
+	static t_word	*paths;
+	int				fd;
+
+	if (!paths)
+		paths = rdwr_in_heredocs(NULL);
+	else if (paths && paths->next)
+		paths = paths->next;
+	if (paths)
+	{
+		if ((fd = open(paths->word, O_RDONLY)) > 0)
+		{
+			dup2(fd, STDIN_FILENO);
+			close(fd);
+		}
+	}
+}

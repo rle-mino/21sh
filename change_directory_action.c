@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   change_directory_action.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ishafie  <ishafie @student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/28 00:27:30 by ishafie           #+#    #+#             */
-/*   Updated: 2016/04/03 03:55:42 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/23 14:23:58 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char			*change_to_home(t_env *e, char *str)
 		return (str);
 	if (!str)
 		return (tmp->content);
-	if (ft_strcmp(str + 1, "ishafie") == 0)
+	if (ft_strcmp(str + 1, "rle-mino") == 0)
 		return (ft_strdup(tmp->content));
 	if (str + 1)
 		final = ft_strjoin(tmp->content, str + 1);

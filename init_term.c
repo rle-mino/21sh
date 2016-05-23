@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_term.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ishafie  <ishafie @student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 00:56:10 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/16 23:20:04 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/23 14:31:54 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int				reset_term(struct termios reset)
 	term = reset;
 	if (tcsetattr(0, 0, &term) == -1)
 		return (0);
-//	tputs(tgetstr("cl", &tmp), 1, ft_putint);
 	return (1);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ishafie  <ishafie @student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 13:32:36 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/15 22:31:06 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/23 14:26:54 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,11 @@ void			free_any_cmd(t_env *e, char **str, int i)
 	{
 		if (a == i)
 		{
-			if (ft_strcmp(str[a], ">&-") == 0 || ft_strcmp(str[a] + 1, ">&-") == 0)
+			if (ft_strcmp(str[a], ">&-") == 0 ||
+						ft_strcmp(str[a] + 1, ">&-") == 0)
 				closing = 1;
 			free(str[a]);
-			str[a] = NULL;
-			if (!str[a + 1])
+			if (!(str[a] = NULL) && !str[a + 1])
 				return ;
 		}
 		if (closing == 0 && free_any_cmd_helper(&str, i, a) == 0)

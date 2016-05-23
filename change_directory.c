@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   change_directory.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ishafie  <ishafie @student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 22:36:55 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/07 21:18:42 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/23 14:24:32 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int					go_to_home(t_env *e, char **args)
 		return (0);
 	if (aux && pwd)
 		aux->content = pwd->content;
-//	if (pwd && tmp)
-//		pwd->content = tmp->content;
 	if (chdir(tmp->content) == -1)
 		return (cd_error(tmp->content));
 	if (pwd)

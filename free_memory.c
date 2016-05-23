@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_memory.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ishafie  <ishafie @student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 15:10:09 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/16 18:03:54 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/23 14:28:47 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 void			free_env_tab(char **env)
 {
 	free_args(env);
-/*	env = (char**)malloc(sizeof(char*) * 2);
-	if (!env)
-	malloc_handling();*/
 	env[0] = NULL;
 	env[1] = NULL;
 }
@@ -33,9 +30,6 @@ void			free_args(char **args)
 		args[i] = NULL;
 		i++;
 	}
-//	fpf("1 : %p\n", args);
-//	free(args);
-//	args = NULL;
 }
 
 static void		free_data_one(t_data **lst)

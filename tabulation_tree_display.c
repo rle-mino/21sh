@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   tabulation_tree_display.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ishafie  <ishafie @student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 02:07:51 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/15 03:51:41 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/23 14:36:53 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "arbre.h"
 
-int				afficher_mot(t_arbre a, char *buf, int indice)
+int				afficher_mot(t_arbre *a, char *buf, int indice)
 {
 	if (a == NULL)
 		return (0);
@@ -37,7 +37,7 @@ int				afficher_mot(t_arbre a, char *buf, int indice)
 	return (indice);
 }
 
-int				afficher_chemin(t_arbre a, char *buf, int indice)
+int				afficher_chemin(t_arbre *a, char *buf, int indice)
 {
 	if (a == NULL)
 		return (0);
@@ -55,7 +55,7 @@ int				afficher_chemin(t_arbre a, char *buf, int indice)
 	return (indice);
 }
 
-int				afficher_alphabetique(t_arbre *a)
+int				afficher_alphabetique(t_arbre **a)
 {
 	char		*buf;
 	int			len;

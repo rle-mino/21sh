@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ishafie  <ishafie @student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 04:57:37 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/16 19:52:49 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/23 14:38:27 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@
 
 char					*g_name_prog;
 
-//ajout
-
 int						exec_easy(t_env *e, t_cmd *comd);
 
 void					free_cmd(t_env *e);
@@ -47,16 +45,13 @@ void					free_tab(char **str);
 int						redirection_cmd(t_env *e, char **line);
 int						redirection_error(char **line, int i);
 int						choose_redir(t_env *e, char **l, int i, int *nb);
-int						find_redir_str(char **str, char **redir, char **prefix,
-						char **out);
 
 int						str_redir_ok(char **str);
 int						find_redir(char **line);
 int						choose_alt_redir(t_env *e, char **line, int i);
 int						choose_alt_redir_in(char **line, int i);
-void					redir_heredoc(t_env *e, char **line, int i);
+void					redir_heredoc(void);
 
-char					*join_all(char *first, char *second, char *third);
 void					get_only_redir_helper(char *str, int *end);
 void					redirection_out_helper(char **line, int i,
 						int alt_redir, int nb);
@@ -167,6 +162,5 @@ int						shlvl(char **suffix);
 int						suite_get_all_function(t_env *e, char **args);
 
 int						loop_prompt(t_env *data_env);
-
 
 #endif

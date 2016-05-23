@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ishafie  <ishafie @student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 20:57:04 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/17 01:15:41 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/23 14:21:52 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,22 +90,12 @@ int				redirection_in(t_env *e, char **line, int i)
 
 	redir = choose_redir(e, line, i, &nb);
 	alt_redir = choose_alt_redir_in(line, i);
-	if (alt_redir == 1 || alt_redir == 2)
-	{
-		if (alt_redir == 2)
-			close(ft_atoi(ft_strsub(line[i - 1], 0, nb)));
-		else
-			dup2(STDIN_FILENO, ft_atoi(ft_strsub(line[i - 1], 0, nb)));
-	}
+	if (alt_redir == 2)
+		close(ft_atoi(ft_strsub(line[i - 1], 0, nb)));
+	else if (alt_redir == 1)
+		dup2(STDIN_FILENO, ft_atoi(ft_strsub(line[i - 1], 0, nb)));
 	else if (alt_redir == 3)
-	{
-		/*char buf[10];
-		ft_bzero(buf, sizeof(buf));
-		fflush(STDIN_FILENO);
-		getchar();
-		read(0, buf, 9);
-		redir_heredoc(e, line, i);*/
-	}
+		redir_heredoc();
 	else
 	{
 		in = open(line[i], O_RDONLY);
@@ -125,9 +115,6 @@ int				redirection_cmd(t_env *e, char **line)
 	int			error;
 
 	error = 0;
-/*	int a = 0;
-	while (line[a])
-	dprintf(2, "line = %s\n", line[a++]);*/
 	if (!line || !*line || (redir = find_redir(line)) == 0)
 		return (0);
 	if ((i = get_next_redir(line)) == -1)

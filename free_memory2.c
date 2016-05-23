@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_memory2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ishafie  <ishafie @student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 17:20:12 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/15 22:32:03 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/23 14:29:15 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void		free_cmd(t_env *e)
 	e->comd = NULL;
 }
 
-void		free_arbre(t_arbre *a)
+void		free_arbre(t_arbre **a)
 {
 	if (!(*a))
 		return ;

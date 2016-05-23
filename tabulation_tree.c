@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   tabulation_tree.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ishafie  <ishafie @student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 03:37:33 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/15 03:41:28 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/23 14:37:07 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "arbre.h"
 
-t_arbre			alloue_noeud(unsigned char val, t_arbre fg, t_arbre fd)
+t_arbre			*alloue_noeud(unsigned char val, t_arbre *fg, t_arbre *fd)
 {
-	t_arbre			tmp;
+	t_arbre			*tmp;
 
-	if (!(tmp = (t_arbre)malloc(sizeof(struct s_noeud))))
+	if (!(tmp = (t_arbre*)malloc(sizeof(struct s_noeud))))
 		return (NULL);
 	tmp->filsg = fg;
 	tmp->frered = fd;
@@ -24,7 +24,7 @@ t_arbre			alloue_noeud(unsigned char val, t_arbre fg, t_arbre fd)
 	return (tmp);
 }
 
-int				creer_arbre(t_arbre *a, char *name)
+int				creer_arbre(t_arbre **a, char *name)
 {
 	struct dirent	*file;
 	DIR				*folder;
@@ -43,9 +43,9 @@ int				creer_arbre(t_arbre *a, char *name)
 	return (1);
 }
 
-int				ajoute_mot_helper(t_arbre *a, char *str)
+int				ajoute_mot_helper(t_arbre **a, char *str)
 {
-	t_arbre			tmp;
+	t_arbre			*tmp;
 
 	tmp = alloue_noeud(str[0], NULL, NULL);
 	if (!tmp)
@@ -57,9 +57,9 @@ int				ajoute_mot_helper(t_arbre *a, char *str)
 	return (ajoute_mot(&(*a)->filsg, &str[1]));
 }
 
-int				ajoute_mot(t_arbre *a, char *str)
+int				ajoute_mot(t_arbre **a, char *str)
 {
-	t_arbre			tmp;
+	t_arbre			*tmp;
 
 	tmp = NULL;
 	if (!str)

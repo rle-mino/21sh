@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 19:04:52 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/15 22:21:56 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/23 14:27:50 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,39 @@
 ***		gere l'appairage de certains caracteres recursivement
 */
 
-static void			create_first_line(t_le *le)
+static void			parse_buffer_heredoc_for_norme(char *buffer, t_le *le)
 {
-	le->line->next = ft_memalloc(sizeof(t_line));
-	le->line->next->prev = le->line;
-	le->line = le->line->next;
-	le->line->c = '\n';
+	if (buffer[0] == 4 && !buffer[1])
+		stop_heredoc(-1);
+	else
+		parse_buffer(buffer, le, PAIRING);
+}
+
+static void			create_first_line(t_le *le, int bsn)
+{
+	if (!bsn || !le->line)
+		le->line = ft_memalloc(sizeof(t_line));
+	else
+	{
+		le->line->next = ft_memalloc(sizeof(t_line));
+		le->line->next->prev = le->line;
+		le->line = le->line->next;
+	}
+	le->line->c = bsn ? '\n' : 0;
 	le->line->is_orig = 1;
+}
+
+static void			prepare_here_doc(t_line **line)
+{
+	t_line		*tmp;
+
+	tmp = *line;
+	if ((*line)->prev)
+		*line = (*line)->prev;
+	if ((*line)->next)
+		tmp = (*line)->next;
+	clear_line(tmp);
+	(*line)->next = NULL;
 }
 
 void				edit_line_pairing(t_le *le, char *prompt)
@@ -31,7 +57,7 @@ void				edit_line_pairing(t_le *le, char *prompt)
 
 	le->pos_x = ft_strlen(prompt);
 	ft_putstr_fd(prompt, get_fd(-1));
-	create_first_line(le);
+	create_first_line(le, 1);
 	while (42)
 	{
 		ft_bzero(buffer, sizeof(buffer));
@@ -48,28 +74,29 @@ void				edit_line_pairing(t_le *le, char *prompt)
 		edit_line_pairing(le, le->prompt);
 }
 
-char				*edit_line_heredoc(t_le *le, char *end)
+t_line				*edit_line_heredoc(t_le *le, char *end, int bsn)
 {
-	char	buffer[6];
+	char			buffer[6];
 
 	ft_putstr_fd("heredoc> ", get_fd(-1));
 	le->pos_x = ft_strlen("heredoc> ");
-	create_first_line(le);
+	create_first_line(le, bsn);
+	bsn = !bsn ? 1 : bsn;
 	while (42)
 	{
 		ft_bzero(buffer, sizeof(buffer));
 		read(0, buffer, 5);
-		parse_buffer(buffer, le, PAIRING);
-		if (buffer[0] == '\n' && buffer[1] == 0)
+		parse_buffer_heredoc_for_norme(buffer, le);
+		if ((buffer[0] == '\n' && buffer[1] == 0) || le->sig)
 		{
 			move_to_last(le, &(le->line));
 			tputs(tgetstr("do", NULL), 1, ft_putint);
 			break ;
 		}
 	}
-	if (ft_strcmp(to_string(get_orig_line(le->line), RUP_FOR_HIST), end))
-		edit_line_heredoc(le, end);
-	if ((le->prompt = missing_pair(get_first_line(le->line), 0)))
-		edit_line_pairing(le, le->prompt);
-	return (to_string(get_first_line(le->line), RUP_FOR_HIST));
+	if (end_is_not_in_line(le, end))
+		edit_line_heredoc(le, end, 1);
+	else if (!le->sig && (le->line = get_orig_line(le->line)))
+		prepare_here_doc(&(le->line));
+	return (get_first_line(le->line));
 }

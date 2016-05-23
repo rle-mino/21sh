@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:40:16 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/16 23:17:51 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/23 14:38:44 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 # include <sys/ioctl.h>
 # include <fcntl.h>
 # include "dirent.h"
-
-# define DEBUG fpf("%d - %s - %s\n" ,__LINE__, __func__, __FILE__)
 
 enum
 {
@@ -48,6 +46,7 @@ enum
 enum
 {
 	PAIRING,
+	HEREDOC,
 	NORMAL
 };
 
@@ -85,6 +84,7 @@ typedef struct			s_le
 	int					w_sizey;
 	int					pos_x;
 	int					pos_y;
+	int					sig;
 	t_line				*line;
 	char				*prompt;
 }						t_le;
@@ -97,6 +97,12 @@ typedef struct			s_hist
 	struct s_hist		*prev;
 }						t_hist;
 
+typedef struct			s_word
+{
+	char				*word;
+	struct s_word		*next;
+}						t_word;
+
 /*
 ***		structs for command execution and env
 */
@@ -106,7 +112,7 @@ typedef struct			s_noeud
 	unsigned char		lettre;
 	struct s_noeud		*filsg;
 	struct s_noeud		*frered;
-}						*t_arbre;
+}						t_arbre;
 
 typedef struct			s_arg
 {
@@ -152,7 +158,7 @@ typedef struct			s_env
 	int					backup;
 	t_data				*data_backup;
 	t_le				le;
-	t_arbre				tb; // a enlever
+	t_arbre				*tb;
 	int					total_nb_cmd;
 	int					nb_pipe;
 	int					fd;
@@ -188,6 +194,7 @@ int						redisplay_line_index(t_line *line, t_le *le);
 t_line					*add_space_between_redir(t_line *line);
 void					update_size(int sig);
 void					restart_prompt(int sig);
+void					stop_heredoc(int sig);
 void					show_me_cursor(t_le *le);
 t_line					*edit_line(t_le *le);
 int						ft_is_arrow(char *buffer);
@@ -219,7 +226,14 @@ void					move_cursor(t_le *le, int dir, t_line **line, int mode);
 char					*missing_pair(t_line *line, int indquote);
 void					edit_line_pairing(t_le *le, char *prompt);
 t_line					*get_orig_line(t_line *line);
-char					*edit_line_heredoc(t_le *le, char *end);
+t_line					*edit_line_heredoc(t_le *le, char *end, int bsn);
+void					write_here_in_file(t_word *tmp, char *in_heredoc);
+void					prepare_heredoc(t_le *le, t_line *line);
+t_word					*rdwr_in_heredocs(char *in_heredoc);
+t_word					*clear_words(t_word **word, int *id);
+t_word					*get_heredocs_add(void *ad);
+void					ignore_heredoc(t_le *le, void *tmp);
+int						end_is_not_in_line(t_le *le, char *end);
 /*
 ***		history
 */

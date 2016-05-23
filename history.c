@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/01 12:06:40 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/15 19:38:23 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/23 14:31:03 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ static t_hist			*read_history(t_env *env)
 	{
 		tmp_hist->prev = generate_hist(to_line(tmp), tmp_hist, NULL);
 		tmp_hist = tmp_hist->prev;
+		free(tmp);
 	}
 	close(fd);
 	return (history);

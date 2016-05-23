@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ishafie  <ishafie @student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/03 02:45:04 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/15 18:46:05 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/23 14:37:30 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		how_to_tab(t_env *e, char **args)
+int			how_to_tab(t_env *e, char **args)
 {
-	t_arbre a;
+	t_arbre *a;
 	char	*mot;
 
 	mot = (char*)malloc(sizeof(char) * 100);
@@ -23,9 +23,9 @@ void		how_to_tab(t_env *e, char **args)
 	a = e->tb;
 	e->tb = recherche(&(e->tb), args[2]);
 	completion_tree(e->tb, &mot, 0);
-	dprintf(2, "MOT = %s\n", mot);
 	free_arbre(&a);
 	e->tb = NULL;
+	return (1);
 }
 
 int			suite_get_all_function(t_env *e, char **args)
@@ -47,15 +47,11 @@ int			suite_get_all_function(t_env *e, char **args)
 	}
 	if (ft_strcmp(args[0], "reset") == 0)
 	{
-		// remettre struct env
 		tputs(tgetstr("cl", NULL), 1, ft_putint);
 		return (1);
 	}
-	if (ft_strcmp(args[0], "tab") == 0) // a enlever
-	{
-		how_to_tab(e, args);
-		return (1);
-	}
+	if (ft_strcmp(args[0], "tab") == 0)
+		return (how_to_tab(e, args));
 	return (0);
 }
 

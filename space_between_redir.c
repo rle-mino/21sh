@@ -6,13 +6,13 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 18:59:26 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/15 20:14:36 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/23 14:36:10 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tos.h"
 
-void		insert_space_in_line(t_line **line)
+void			insert_space_in_line(t_line **line)
 {
 	t_line	*new;
 
@@ -28,7 +28,18 @@ void		insert_space_in_line(t_line **line)
 	(*line) = (*line)->next;
 }
 
-t_line		*add_space_between_redir(t_line *line)
+static void		add_space_special_redir(t_line **line)
+{
+	*line = (*line)->next;
+	while (*line && ((*line)->c == '&' || (*line)->c == '-' ||
+											(*line)->c == '>'))
+		*line = (*line)->next;
+	if ((*line) && (*line)->c != ' ')
+		(*line) = (*line)->prev;
+	insert_space_in_line(line);
+}
+
+t_line			*add_space_between_redir(t_line *line)
 {
 	t_line		*first;
 
@@ -40,12 +51,10 @@ t_line		*add_space_between_redir(t_line *line)
 				&& !ft_isdigit(line->next->c) && line->next->c != '>')
 			insert_space_in_line(&line);
 		else if (line && line->c == '>')
+			add_space_special_redir(&line);
+		else if (line->c == '<' && line->next && line->next->c == '<')
 		{
 			line = line->next;
-			while (line && (line->c == '&' || line->c == '-' || line->c == '>'))
-				line = line->next;
-			if (line && line->c != ' ')
-				line = line->prev;
 			insert_space_in_line(&line);
 		}
 		if (line)

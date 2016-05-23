@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   tabulation_tree_action.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ishafie  <ishafie @student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 03:36:59 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/15 03:37:07 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/23 14:36:37 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "arbre.h"
 
-void			completion_tree(t_arbre a, char **mot, int i)
+void			completion_tree(t_arbre *a, char **mot, int i)
 {
 	if (!a)
 		return ;
@@ -26,7 +26,7 @@ void			completion_tree(t_arbre a, char **mot, int i)
 		completion_tree(a->filsg, mot, i + 1);
 }
 
-t_arbre			recherche(t_arbre *a, char *mot)
+t_arbre			*recherche(t_arbre **a, char *mot)
 {
 	if (!mot)
 		return (NULL);
