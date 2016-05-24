@@ -6,14 +6,13 @@
 #    By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/25 23:31:13 by rle-mino          #+#    #+#              #
-#    Updated: 2016/05/20 21:54:11 by rle-mino         ###   ########.fr        #
+#    Updated: 2016/05/24 22:25:26 by rle-mino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=					21sh
+NAME		=				21sh
 
-SRC		=					DEBUG_FOR_EDIT_LINE_TO_DELETE.c			\
-							actualise_env.c							\
+SRC			=				actualise_env.c							\
 							buffer_parse.c							\
 							change_directory.c						\
 							change_directory_action.c				\
@@ -74,9 +73,11 @@ SRC		=					DEBUG_FOR_EDIT_LINE_TO_DELETE.c			\
 							tools.c									\
 
 
-OBJ		=				$(SRC:.c=.o)
+OBJ_NAME	=		$(SRC:.c=.o)
+OBJ_PATH	=		obj/
+OBJ			=		$(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
-FLAGS	=			 	-Wall -Wextra -Werror
+FLAGS		=		-Wall -Wextra -Werror
 
 .PHONY: all, clean, fclean, re
 
@@ -86,11 +87,13 @@ $(NAME): $(OBJ)
 
 all: $(NAME)
 
-%.o: %.c
+$(OBJ_PATH)%.o: %.c
+	@mkdir -p obj
 	gcc -c $< -o $@ -I includes $(FLAGS)
 
 clean:
-	rm -rf $(OBJ)
+	make -C libft/ fclean
+	rm -rf $(OBJ_PATH)
 
 fclean: clean
 	rm -rf $(NAME)

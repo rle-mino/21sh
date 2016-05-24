@@ -6,11 +6,9 @@
 #    By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 09:50:20 by rle-mino          #+#    #+#              #
-#    Updated: 2016/05/02 14:58:33 by ishafie          ###   ########.fr        #
+#    Updated: 2016/05/24 22:29:15 by rle-mino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-#SOURCE
 
 SRC	=		ft_memset.c			\
 			ft_bzero.c			\
@@ -83,108 +81,24 @@ SRC	=		ft_memset.c			\
 			ft_error.c			\
 			get_next_line.c		\
 
-SRC_PF =	printf/ft_printf.c					\
-			printf/ftp_putnbr.c					\
-			printf/pf_until_conv.c				\
-			printf/pf_putascii.c				\
-			printf/pf_put.c						\
-			printf/pf_print_line.c				\
-			printf/pf_percent_conv.c			\
-			printf/pf_is.c						\
-			printf/pf_fill_data.c				\
-			printf/pf_call_printer.c			\
-			printf/pf_puthexa_z.c				\
-			printf/pf_puthexa_ll.c				\
-			printf/pf_puthexa_l.c				\
-			printf/pf_puthexa_j.c				\
-			printf/pf_puthexa_hh.c				\
-			printf/pf_puthexa_h.c				\
-			printf/pf_puthexa.c					\
-			printf/pf_hexa_conv.c				\
-			printf/hexa_conv_z.c				\
-			printf/hexa_conv_noclong.c			\
-			printf/hexa_conv_ll.c				\
-			printf/hexa_conv_l.c				\
-			printf/hexa_conv_j.c				\
-			printf/hexa_conv_hh.c				\
-			printf/hexa_conv_h.c				\
-			printf/pf_putdeci_z.c				\
-			printf/pf_putdeci_ll.c				\
-			printf/pf_putdeci_l.c				\
-			printf/pf_putdeci_j.c				\
-			printf/pf_putdeci_hh.c				\
-			printf/pf_putdeci_h.c				\
-			printf/pf_deci_conv.c				\
-			printf/deci_conv_z.c				\
-			printf/deci_conv_noclong.c			\
-			printf/deci_conv_ll.c				\
-			printf/deci_conv_l.c				\
-			printf/deci_conv_j.c				\
-			printf/deci_conv_hh.c				\
-			printf/deci_conv_h.c				\
-			printf/pf_putoctal_z.c				\
-			printf/pf_putoctal_ll.c				\
-			printf/pf_putoctal_l.c				\
-			printf/pf_putoctal_j.c				\
-			printf/pf_putoctal_hh.c				\
-			printf/pf_putoctal_h.c				\
-			printf/pf_putoctal.c				\
-			printf/pf_octal_conv.c				\
-			printf/octal_conv_z.c				\
-			printf/octal_conv_noclong.c			\
-			printf/octal_conv_ll.c				\
-			printf/octal_conv_l.c				\
-			printf/octal_conv_j.c				\
-			printf/octal_conv_hh.c				\
-			printf/octal_conv_h.c				\
-			printf/string_conv_noclong.c		\
-			printf/string_conv_l.c				\
-			printf/pf_string_conv.c				\
-			printf/pf_putstruni.c				\
-			printf/pf_putcharuni.c				\
-			printf/pf_char_conv.c				\
-			printf/char_conv_noclong.c			\
-			printf/char_conv_l.c				\
-			printf/pf_putmem_noclong.c			\
-			printf/pf_mem_conv.c				\
-			printf/mem_conv.c					\
-			printf/unsigned_conv_z.c			\
-			printf/unsigned_conv_noclong.c		\
-			printf/unsigned_conv_ll.c			\
-			printf/unsigned_conv_l.c			\
-			printf/unsigned_conv_j.c			\
-			printf/unsigned_conv_hh.c			\
-			printf/unsigned_conv_h.c			\
-			printf/pf_unsigned_conv.c			\
-			printf/pf_putunsigned_z.c			\
-			printf/pf_putunsigned_noclong.c		\
-			printf/pf_putunsigned_ll.c			\
-			printf/pf_putunsigned_l.c			\
-			printf/pf_putunsigned_j.c			\
-			printf/pf_putunsigned_hh.c			\
-			printf/pf_putunsigned_h.c			\
-			printf/binary.c
+OBJ_NAME	=		$(SRC:.c=.o)
+OBJ_PATH	=		obj/
+OBJ			=		$(addprefix $(OBJ_PATH), $(OBJ_NAME))
+NAME		=		libft.a
+FLAGS		=		-Wall -Wextra -Werror
 
-
-DOTO	=		$(SRC:.c=.o)
-
-DOTO_PF	=		$(SRC_PF:.c=.o)
-
-#NAME
-NAME=		libft.a
-
-#RULE
-all: $(NAME)
-
-$(NAME): $(DOTO) $(DOTO_PF)
-	ar rc $(NAME) $(DOTO) $(DOTO_PF)
+$(NAME): $(OBJ)
+	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
-%.o: %.c
+all: $(NAME)
+
+$(OBJ_PATH)%.o: %.c
+	@mkdir -p obj
 	gcc -c $(FLAGS) -I includes $< -o $@
 
 clean:
-	rm -rf $(DOTO) $(DOTO_PF)
+	rm -rf $(OBJ_PATH)
 
 fclean:	clean
 	rm -rf $(NAME)
