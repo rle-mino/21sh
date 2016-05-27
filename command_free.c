@@ -6,20 +6,39 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 00:44:50 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/26 00:45:12 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/27 16:17:42 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		free_first_cmd(char ***str, int i)
+static int			closing_redir(char ***str)
+{
+	if (str && *str && *str + 1 && ft_strcmp((*str)[0] + 1, ">&-") == 0)
+		return (1);
+	if (str && *str && *str + 1 && ft_strcmp((*str)[0] + 1, "<&-") == 0)
+		return (1);
+	if (str && *str && *str + 1 && ft_strcmp((*str)[0] + 1, "<&") == 0)
+		return (1);
+	if (str && *str && *str + 1 && ft_strcmp((*str)[0] + 1, ">&") == 0)
+		return (1);
+	if (str && *str && *str + 1 && ft_strcmp((*str)[0], ">&-") == 0)
+		return (1);
+	if (str && *str && *str + 1 && ft_strcmp((*str)[0], "<&-") == 0)
+		return (1);
+	if (str && *str && *str + 1 && ft_strcmp((*str)[0], "<&") == 0)
+		return (1);
+	if (str && *str && *str + 1 && ft_strcmp((*str)[0], ">&") == 0)
+		return (1);
+	return (0);
+}
+
+void				free_first_cmd(char ***str, int i)
 {
 	int		a;
 	int		closing;
 
-	closing = 0;
-	if (str && *str && *str + 1 && ft_strcmp((*str)[0] + 1, ">&-") == 0)
-		closing = 1;
+	closing = closing_redir(str);
 	if (!str || !*str || !(*str)[1] || (!(*str)[2] && closing != 1))
 		return ;
 	free((*str)[0]);
