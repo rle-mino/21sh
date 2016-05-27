@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/08 16:42:45 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/15 22:37:34 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/27 15:51:54 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static int		pipe_is_alone(t_line *line)
 		{
 			while (line)
 			{
-				if (line->c != ' ' && line->c != '\0' && line->c != '|')
+				if (line->c != ' ' && line->c != '\0' && line->c != '|' &&
+																line->c != '\n')
 					break ;
 				line = line->next;
 			}
@@ -76,10 +77,11 @@ char			*missing_pair(t_line *line, int indquote)
 	t_line			*first;
 
 	first = line;
+	indquote = 0;
 	while (line)
 	{
 		paired = 0;
-		indquote = line && line->c == '\"' && indquote ? 0 : 1;
+		indquote = (line && line->c == '\"') || indquote ? 1 : 0;
 		if ((find = ft_strchr(missing, line->c)) && line->paired == 0 &&
 		!(paired = search_pair(line->next, reverse_pair(line->c))) && line->c)
 		{

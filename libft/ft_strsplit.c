@@ -6,7 +6,7 @@
 /*   By: rle-mino <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 16:29:50 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/15 02:53:23 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/26 22:09:08 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static char		*nblet(char const *s, char c, const int j)
 {
 	int			i;
 	int			k;
-	char		*x;
 	int			m;
 	int			o;
 
@@ -58,8 +57,7 @@ static char		*nblet(char const *s, char c, const int j)
 		k++;
 		i++;
 	}
-	x = ft_strnew(k);
-	return (x = ft_strsub(s, o, k));
+	return (ft_strsub(s, o, k));
 }
 
 char			**ft_strsplit(char const *s, char c)

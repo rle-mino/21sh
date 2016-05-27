@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 20:51:07 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/15 22:08:44 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/26 22:09:20 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ static char		*nblet(char const *s, const int j, int *i_quote)
 {
 	int			i;
 	int			k;
-	char		*x;
 	int			o;
 
 	k = 0;
@@ -99,8 +98,7 @@ static char		*nblet(char const *s, const int j, int *i_quote)
 	}
 	if (k == -1)
 		k = 0;
-	x = ft_strnew(k);
-	return (x = ft_strsub(s, o, k));
+	return (ft_strsub(s, o, k));
 }
 
 char			**ft_strsplit_space(char const *s)
