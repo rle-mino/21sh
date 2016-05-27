@@ -6,7 +6,7 @@
 /*   By: ishafie <ishafie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 03:18:11 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/24 22:04:05 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/27 19:30:24 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ int			loop_prompt2(t_env *data_env, char *line)
 			if (i == SIGSEGV && error != -1)
 				safe_exit(i);
 		}
-		rdwr_in_heredocs((void*)get_heredocs_add(NULL));
 	}
 	return (1);
 }
@@ -130,5 +129,6 @@ int			loop_prompt(t_env *e)
 		history(ADD_HIST, add_to_hist);
 		e->total_nb_cmd = get_nb_cmd(line);
 		before_loop_prompt2(e, 0, &line, &new_line);
+		rdwr_in_heredocs((void*)get_heredocs_add(NULL));
 	}
 }

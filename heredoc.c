@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 13:53:03 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/27 18:48:32 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/27 19:40:00 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,15 @@ static void			add_to_here(t_word **here, char *eoh)
 
 static void			get_eoh(t_line *line, t_word **here)
 {
-	char	buff[1024];
+	char	*buff;
 	int		i;
 
 	i = 0;
+	buff = (char *)ft_memalloc(1024);
 	if (line->next && line->next->next)
 		line = line->next->next;
 	while (line && line->c == ' ')
 		line = line->next;
-	ft_bzero(buff, sizeof(buff));
 	while (line && line->c != ' ')
 	{
 		buff[i] = line->c;
@@ -80,6 +80,7 @@ static void			get_eoh(t_line *line, t_word **here)
 		line = line->next;
 	}
 	add_to_here(here, buff);
+	free(buff);
 }
 
 static t_word		*get_heredocs(t_line *line)
