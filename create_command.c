@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 00:34:00 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/26 00:34:19 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/27 15:51:41 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ void			free_any_cmd(t_env *e, char **str, int i)
 	{
 		if (a == i)
 		{
-			if (ft_strcmp(str[a], ">&-") == 0 ||
-						ft_strcmp(str[a] + 1, ">&-") == 0)
+			if (!ft_strcmp(str[a], ">&-") || !ft_strcmp(str[a] + 1, ">&-") ||
+			!ft_strcmp(str[a] + 1, "<&-") || !ft_strcmp(str[a], "<&-"))
 				closing = 1;
 			free(str[a]);
 			if (!(str[a] = NULL) && !str[a + 1])

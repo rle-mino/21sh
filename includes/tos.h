@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:40:16 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/24 18:41:55 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/27 16:41:18 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 # include <sys/ioctl.h>
 # include <fcntl.h>
 # include "dirent.h"
-
-#define DEBUG dprintf(2, "%d - %s - %s\n", __LINE__, __func__, __FILE__);
 
 enum
 {
@@ -42,7 +40,8 @@ enum
 	FIRST_HIST,
 	SECOND_HIST,
 	ADD_HIST,
-	SAVE_LINE
+	SAVE_LINE,
+	RES_ORI
 };
 
 enum

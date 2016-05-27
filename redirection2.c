@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 00:31:10 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/26 00:32:20 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/27 15:46:40 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int			get_only_redir(char *str, int *i, int *end)
 int			choose_redir(t_env *e, char **l, int i, int *nb)
 {
 	(void)e;
+	if (!*l || !**l || !l[i - 1])
+		return (-1);
 	if (ft_isdigit(l[i - 1][0]))
 	{
 		while (ft_isdigit(l[i - 1][*nb]))

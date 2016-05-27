@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/01 13:38:26 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/19 15:25:40 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/27 16:52:44 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void			stop_heredoc(int sig)
 	(void)sig;
 	env = get_t_env(NULL);
 	env->le.sig = 1;
+	history(RES_ORI, NULL);
+	env->le.pos_x = 4;
 }
 
 void			restart_prompt(int sig)
@@ -45,6 +47,8 @@ void			restart_prompt(int sig)
 	clear_line(get_first_line(env->le.line));
 	env->le.line = ft_memalloc(sizeof(t_line));
 	env->le.line->is_orig = 1;
+	history(RES_ORI, NULL);
+	env->le.pos_x = 4;
 }
 
 static void		seg_exit(void)

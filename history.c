@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/01 12:06:40 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/23 14:31:03 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/27 16:49:54 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,8 @@ t_line					*history(int query, t_line *line)
 		history = get_first_hist(history);
 	else if (query == ADD_HIST)
 		create_new_hist(&history, line);
+	else if (query == RES_ORI && (ori_line = ft_memalloc(sizeof(t_line))))
+		ori_line->is_orig = 1;
 	if ((query == NEXT_HIST || query == PREV_HIST) && !(history->old_line))
 		return (ori_line);
 	if (query == NEXT_HIST || query == PREV_HIST)

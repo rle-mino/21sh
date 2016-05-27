@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 00:29:11 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/26 00:29:39 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/27 15:54:22 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int				redirection_in(t_env *e, char **line, int i)
 	int			redir;
 	int			nb;
 
+	nb = 0;
 	redir = choose_redir(e, line, i, &nb);
 	alt_redir = choose_alt_redir_in(line, i);
 	if (alt_redir == 2)
@@ -115,7 +116,7 @@ int				redirection_cmd(t_env *e, char **line)
 	int			error;
 
 	error = 0;
-	if (!line || !*line || (redir = find_redir(line)) == 0)
+	if (!line || !*line || !line[1] || (redir = find_redir(line)) == 0)
 		return (0);
 	if ((i = get_next_redir(line)) == -1)
 		error = -1;
