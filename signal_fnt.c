@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_fnt.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ishafie <ishafie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/01 13:38:26 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/27 18:29:18 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/28 18:46:25 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void			stop_heredoc(int sig)
 	env->le.sig = 1;
 	history(RES_ORI, NULL);
 	env->le.pos_x = 4;
-	signal(SIGINT, restart_prompt);
 }
 
 void			restart_prompt(int sig)

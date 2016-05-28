@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 19:04:52 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/23 14:27:50 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/28 18:39:42 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,6 @@
 /*
 ***		gere l'appairage de certains caracteres recursivement
 */
-
-static void			parse_buffer_heredoc_for_norme(char *buffer, t_le *le)
-{
-	if (buffer[0] == 4 && !buffer[1])
-		stop_heredoc(-1);
-	else
-		parse_buffer(buffer, le, PAIRING);
-}
 
 static void			create_first_line(t_le *le, int bsn)
 {
@@ -86,7 +78,7 @@ t_line				*edit_line_heredoc(t_le *le, char *end, int bsn)
 	{
 		ft_bzero(buffer, sizeof(buffer));
 		read(0, buffer, 5);
-		parse_buffer_heredoc_for_norme(buffer, le);
+		parse_buffer(buffer, le, PAIRING);
 		if ((buffer[0] == '\n' && buffer[1] == 0) || le->sig)
 		{
 			move_to_last(le, &(le->line));

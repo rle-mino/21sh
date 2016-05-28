@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/08 16:42:45 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/27 15:51:54 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/28 18:34:44 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static char		reverse_pair(char c)
 		return ('}');
 	else if (c == '(')
 		return (')');
+	else if (c == '[')
+		return (']');
 	return (c);
 }
 
@@ -69,9 +71,10 @@ static int		search_pair(t_line *line, char f)
 
 char			*missing_pair(t_line *line, int indquote)
 {
-	static char		prompts[6][10] = {"quote> ", "dquote> ", "subsh> ",\
-										"cursh> ", "bquote> ", "pipe> "};
-	static char		missing[7] = "\'\"({`";
+	static char		prompts[7][10] = {"quote> ", "dquote> ", "subsh> ",\
+										"cursh> ", "bquote> ", "glob> ", \
+										"pipe> "};
+	static char		missing[7] = "\'\"({`[";
 	char			*find;
 	int				paired;
 	t_line			*first;
@@ -92,5 +95,5 @@ char			*missing_pair(t_line *line, int indquote)
 			line->paired = 1;
 		line = line->next;
 	}
-	return (pipe_is_alone(first) ? prompts[5] : NULL);
+	return (pipe_is_alone(first) ? prompts[6] : NULL);
 }
