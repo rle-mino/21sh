@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ishafie  <ishafie @student.42.fr>          +#+  +:+       +#+        */
+/*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/24 04:57:37 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/23 14:38:27 by rle-mino         ###   ########.fr       */
+/*   Created: 2016/05/27 17:13:03 by ishafie           #+#    #+#             */
+/*   Updated: 2016/05/27 20:12:39 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void					redir_heredoc(void);
 void					get_only_redir_helper(char *str, int *end);
 void					redirection_out_helper(char **line, int i,
 						int alt_redir, int nb);
+int						redirection_out_file(char **line, int i, int redir,
+						int alt_redir);
 
 /*
 ***		STRUCT COMMAND

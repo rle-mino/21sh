@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 00:31:32 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/26 00:32:00 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/27 18:32:38 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,6 @@ void		redir_heredoc(void)
 	if (paths)
 	{
 		if ((fd = open(paths->word, O_RDONLY)) > 0)
-		{
 			dup2(fd, STDIN_FILENO);
-			close(fd);
-		}
 	}
 }

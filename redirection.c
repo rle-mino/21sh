@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 00:29:11 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/27 15:54:22 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/27 17:49:06 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,16 @@ int				redirection_out(t_env *e, char **line, int i)
 	int			nb;
 
 	nb = 0;
-	out = -1;
 	alt_redir = choose_alt_redir(e, line, i);
 	redir = choose_redir(e, line, i, &nb);
-	if (redir % 2 == 0 && alt_redir != 2)
-		out = open(line[i], O_WRONLY | O_APPEND | O_CREAT, 0644);
-	else if (alt_redir != 2)
-		out = open(line[i], O_WRONLY | O_TRUNC | O_CREAT, 0644);
+	out = redirection_out_file(line, i, redir, alt_redir);
 	if (out == -1 && alt_redir == 0)
 		return (-1);
 	redirection_out_helper(line, i, alt_redir, nb);
-	if (alt_redir != 1 && alt_redir != 2 &&
-	out != -1 && (redir == 1 || redir == 0))
+	if (alt_redir == 1 && out != -1)
+		dup2(out, STDERR_FILENO);
+	if (alt_redir != 1 && alt_redir != 2 && out != -1 &&
+	(redir == 1 || redir == 0))
 		dup2(out, ft_atoi(ft_strsub(line[i - 1], 0, nb)));
 	else if (out != -1)
 		dup2(out, STDOUT_FILENO);

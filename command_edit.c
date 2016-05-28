@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 00:38:19 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/26 00:38:36 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/27 18:52:46 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,11 @@ void			check_and_replace(t_env *e, char **str)
 		if ((*str)[i] == '$')
 		{
 			tmp = (*str);
-			*str = change_to_var(e, (*str), *str + 1 + i, i);
-			free(tmp);
+			if (get_anything(e, *str + 1 + i) != NULL)
+			{
+				*str = change_to_var(e, (*str), *str + 1 + i, i);
+				free(tmp);
+			}
 		}
 		i++;
 	}

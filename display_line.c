@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 18:16:44 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/23 14:27:14 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/27 20:59:37 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int				redisplay_line_index(t_line *line, t_le *le)
 	i = 0;
 	x = 4;
 	tmp = line;
-	while (tmp)
+	while (tmp && i < 1024)
 	{
 		if (x == le->w_sizex)
 			x = 0;

@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 00:31:10 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/27 15:46:40 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/27 17:48:18 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,14 @@ int			choose_redir(t_env *e, char **l, int i, int *nb)
 		if (l[i - 1][0] == '>' && l[i - 1][1] == 0)
 			return (3);
 	}
+	return (-1);
+}
+
+int			redirection_out_file(char **line, int i, int redir, int alt_redir)
+{
+	if (redir % 2 == 0 && alt_redir != 2)
+		return (open(line[i], O_WRONLY | O_APPEND | O_CREAT, 0644));
+	else if (alt_redir != 2)
+		return (open(line[i], O_WRONLY | O_TRUNC | O_CREAT, 0644));
 	return (-1);
 }
