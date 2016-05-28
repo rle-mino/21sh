@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/05 21:09:40 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/24 21:59:03 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/28 20:30:10 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_hist		*generate_hist(t_line *cmd, t_hist *next, t_hist *prev)
 	t_hist		*new;
 
 	new = ft_memalloc(sizeof(t_hist));
-	new->old_line = cmd;
+	new->old_line = cut_line_for_hist(cmd);
 	new->next = next;
 	new->prev = prev;
 	return (new);
