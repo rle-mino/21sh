@@ -6,7 +6,7 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 23:40:16 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/27 16:41:18 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/28 20:30:08 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,6 +247,7 @@ void					clear_line(t_line *line);
 int						get_hist_fd(t_env *env);
 t_hist					*get_first_hist(t_hist *hist);
 void					create_new_hist(t_hist **history, t_line *line);
+t_line					*cut_line_for_hist(t_line *line);
 /*
 ***		completion
 */

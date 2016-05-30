@@ -6,11 +6,28 @@
 /*   By: rle-mino <rle-mino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/05 14:21:43 by rle-mino          #+#    #+#             */
-/*   Updated: 2016/05/24 21:52:28 by rle-mino         ###   ########.fr       */
+/*   Updated: 2016/05/28 20:42:53 by rle-mino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tos.h"
+
+t_line		*cut_line_for_hist(t_line *line)
+{
+	int		i;
+	t_line	*first;
+
+	i = 0;
+	first = line;
+	while (++i < 1024 && line)
+		line = line->next;
+	if (line)
+	{
+		clear_line(line->next);
+		line->next = NULL;
+	}
+	return (first);
+}
 
 t_line		*cpy_line(t_line *line)
 {
