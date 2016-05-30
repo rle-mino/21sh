@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 00:31:32 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/27 18:32:38 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/30 15:14:25 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ void		redirection_out_helper(char **line, int i, int alt_redir, int nb)
 	if (alt_redir == 1 || alt_redir == 2)
 	{
 		str = ft_strsub(line[i - 1], 0, nb);
-		if (str && str[0] == 0)
+		if (str && *str && str[0] == 0)
 			str[0] = '1';
-		if (alt_redir == 2)
+		if (str && *str && alt_redir == 2)
 			close(ft_atoi(str));
-		else
+		else if (str && *str)
 			dup2(ft_atoi(line[i]), ft_atoi(str));
 		free(str);
 	}

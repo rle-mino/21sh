@@ -6,7 +6,7 @@
 /*   By: ishafie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 00:34:00 by ishafie           #+#    #+#             */
-/*   Updated: 2016/05/27 15:51:41 by ishafie          ###   ########.fr       */
+/*   Updated: 2016/05/30 15:09:36 by ishafie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void			free_any_cmd(t_env *e, char **str, int i)
 
 	a = 0;
 	closing = 0;
+	dprintf(2, "lol\n");
 	if (!e->comd || !e->comd->cmd)
 		return ;
 	if (i == 0)
